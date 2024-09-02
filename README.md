@@ -75,3 +75,166 @@ _Respuesta de GitHub Copilot:_
 ```
 Understood. I have processed the information you provided. The requirements and business rules are clear, and I understand the different modules that need to be implemented in the web application. Please proceed with your subsequent prompts, and I will assist you accordingly with generating the necessary diagrams and documentation.
 ```
+
+## Paso 2. Identificacion de los actores y elementos del sistema.
+
+### Identificacion de los actores del sistema
+
+En este punto identificaremos los actores dentro de la aplicacion web, entendiendo que los actores son las diferentes entidades que interactuan entre si dentro de un sistema y que se rigen por las reglas de negocio y restricciones del mismo.
+
+> 🤓 Aclaratoria de sistema
+>
+> Siguiendo la definicion formal de un sistema, como todo conjunto de elementos interrelacionados e interdependientes que funcionan en conjunto para lograr un objetivo comun. Bajo esta premisa, una aplicacion web es un sistema que entra bajo el paradigma de sistemas informaticos, por lo que nos referiremos a partir de este punto como "sistema" en lugar de "aplicacion"
+
+Le pediremos a copilot que identifique a los actores mediante un prompt y que genere documentacion sobre los mismos.
+
+**Prompt 3.**
+```
+Give me a list of the actors of the system.
+```
+_Respuesta de Copilot:_
+
+```md
+**Registered User**
+- Can create events.
+- Can be invited to events.
+- Can view events they are invited to.
+- Can manage their account information.
+- Can delete their account (with restrictions).
+
+**Organizer User**
+- A type of registered user who creates events.
+- Can modify or delete their own events.
+- Can see a list of all attendees for their events.
+
+**Attendee User**
+- A type of registered user who is invited to events.
+- Can view basic information about events they are invited to.
+- Can accept or decline event invitations.
+
+**Administrator User**
+- Has complete control over the application.
+- Can see all events within the application.
+- Can see a list of all users on the platform.
+- Can add, delete, and modify users.
+- Can delete and modify any event.
+```
+
+### Identificacion de elementos y objetos del sistema.
+
+Le pedimos a copilot que identifique elementos utiles como las entidades que conforman el sistema e interactuan entre si.
+
+**Prompt 4.**
+```
+Give me a list of all the entities of the system including actors
+```
+
+__Respuesta de Copilot__
+
+```
+Here is a list of all the entities of the system, including actors:
+
+Actors:
+- Registered User
+- Organizer User
+- Attendee User
+- Administrator User
+
+Entities:
+
+- User
+Attributes: userId, username, email, fullName, age, countryOfResidence, phoneNumber, password, role (Registered, Organizer, Attendee, Administrator)
+
+- Event
+Attributes: eventId, title, description, date, organizerId, state (active, finished), googleMeetLink
+
+- Attendee
+Attributes: attendeeId, eventId, userId, status (accepted, declined)
+
+- Invitation
+Attributes: invitationId, eventId, userId, emailSent (boolean), response (accepted, declined, pending)
+
+These entities and actors interact to fulfill the requirements and business rules of the system.
+```
+
+Si se observa bien Copilot arroja una lista de entidades validas que conforman parte de la aplicacion web que se planea desarrollar, sin embargo hay algunos ajustes que podemos realizar como por ejemplo:
+
+- Un usuario registrado puede tener realmente dos roles, como usuario o un usuario administrador.
+- La restriccion de usuario organizador o usuario atendiente existe solamente por la relacion entre el usuario y el evento.
+- Un usuario organizador se puede identificar por ser el creador de ese evento con un atributo llamado creator_user en la entidad evento.
+- Los usuarios atendientes se pueden identificar mediante una relacion entre las entidades de usuario y evento siendo esta una relacion de muchos a muchos, entendiendo que un evento puede tener muchos usuarios registrados y un usuario puede estar registrado en multiples eventos.
+
+Esta optimizacion se la hacemos saber a Copilot para que modifique las entidades y sus atributos.
+
+**Prompt 5.**
+```
+You did a good analysis on the system requirements, but there are some changes that need to be done in order to optimize this architecture.
+
+1. A registered user can only have in reality two roles, common user and admin user. Only common users can be registed, admin users are built in the system as we mentioned earlier in the requirements.
+
+2. A organizer user isn't a role, in reality is a business rule that can be acomplished by adding a "creator_user" attribute into event entity.
+
+3. A Attendee entity doesn't exist because a User can be both a organizer or a attendee, so all the attendees can be identified by a relationship between the users entity and the events entity, this relationship is a many to many relationship because a user can organize multiple events and also a user can be registered en multiple events.
+
+Take in count this statements and change the entities, actors and attributes accordingly
+```
+
+Proporcionados los cambios, copilot debe responder algo similar a lo siguiente:
+
+```
+Based on the provided optimizations, here is the updated list of actors and entities:
+
+Actors
+
+Common User
+
+- Can create events.
+- Can be invited to events.
+- Can view events they are invited to.
+- Can manage their account information.
+- Can delete their account (with restrictions).
+
+Admin User
+
+- Has complete control over the application.
+- Can see all events within the application.
+- Can see a list of all users on the platform.
+- Can add, delete, and modify users.
+- Can delete and modify any event.
+
+Entities
+
+- User:
+Attributes: userId, username, email, fullName, age, countryOfResidence, phoneNumber, password, role (common, admin)
+
+- Event
+Attributes: eventId, title, description, date, creatorUserId, state (active, finished), googleMeetLink
+
+- UserEvent
+Attributes: userEventId, userId, eventId, status (accepted, declined)
+These changes reflect the optimizations by simplifying the roles and relationships within the system
+```
+
+## Paso 3. Construccion del entorno de trabajo con el agente workspace.
+
+Ya teniendo todo el contexto definido y tanto los actores como entidades del sistema identificadas. Le pedimos a GitHub Copilot que mediante el uso del agente @workspace /new una estructura de carpetas que siga la siguiente forma.
+
+```
+docs/
+    |
+    ---- Entities/
+    |
+    ---- Use Cases/
+    |
+    ---- Actors/
+    |
+    ---- Services/
+    |
+    ---- Diagrams/
+```
+
+**Prompt 6.**
+
+```
+@workspace /new Create a new project named docs with the following folders Entities, UseCases, Actors, Services and Diagrams. This project will contain the architecture documentation of the application that we are working on.
+```
