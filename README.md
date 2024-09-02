@@ -331,3 +331,133 @@ The `User` entity represents a user within the system. It includes details such 
 > ⚠️ Importante
 >
 > Todos estos archivos generados, los guardamos en la carpeta `Entities` del proyecto
+
+## Paso 5. Construccion de la documentacion de los actores del sistema.
+
+Los actores representan entidades que interacturan y se rigen por las reglas de negocio descritas por el negocio. Una entidad puede ser representada por multiples actores dependiendo del caso de uso y dependiendo del flujo de trabajo.
+
+Entendiendo esto, le pedimos a GitHub Copilot, que genere la documentacion de los actores que participan dentro del sistema. Los cuales seran guardados dentro del directorio `docs/Actors`
+
+Le consultamos a copilot los actores del sistema, recordemos que anteriormente le habiamos solicitado identificarlos mas no documentarlos.
+
+**Prompt 8.**
+```
+What are the actors of the system.
+```
+
+_La respuesta de copilot:_
+
+```
+Common User
+- Can create events.
+- Can be invited to events.
+- Can view events they are invited to.
+- Can manage their account information.
+- Can delete their account (with restrictions).
+
+Admin User
+- Has complete control over the application.
+- Can see all events within the application.
+- Can see a list of all users on the platform.
+- Can add, delete, and modify users.
+- Can delete and modify any event.
+```
+
+Por lo tanto le pediremos a GitHub Copilot mediante un prompt que genere una documentacion en archivos markdown de los actores considerando varios aspectos
+
+**Prompt 9.**
+```
+@workspace based on the actors of the system create the documentation file for each one of them. Containing the following information:
+
+1.A Detailed description of the actor. 2. The responsibilities of the actor. 3. The restrictions of the actor. 4. All the business rules applied to him. 5. All the use cases of the actor.
+```
+
+### Troubleshooting: En caso que genere actores diferentes
+
+Para este caso GitHub Copilot nos ha generado actores diferentes a los que hemos venido manejando. Nos ha generado en concreto los siguientes actores: **Participant** y **Admin**
+
+Sin embargo esto no se adapta a las reglas de negocio completas previamente indicadas, ya que el actor **Participant** carece de las capacidades de crear eventos de un usuario **Organizer**. Por ende le pediremos a GitHub Copilot que haga enfasis en los actores previamente identificados **Common User** y **Admin User**, mediante un prompt.
+
+**Fix prompt (Only Apply if necessary)**
+```
+@workspace Previuously you identified the actors of this system as "Common User" and "Admin User". In order to create this system, we need to keep those actors instead the actors you created recently, because all the business rules doesn't apply completely to the newer ones, so this means that "Common User" and "Admin User" must be keeped. Also take note that Common User have the business rules of a Attendant and Organizer, as you described prevously. 
+```
+
+- AdminUser.md
+
+```md
+# Admin User
+
+## Description
+The `Admin User` actor represents a user with administrative privileges within the system. Admins have the ability to manage events, users, and other system settings.
+
+## Responsibilities
+- Create, update, and delete events.
+- Manage user accounts, including creating, updating, and deleting users.
+- Monitor system activity and generate reports.
+- Configure system settings and preferences.
+
+## Restrictions
+- Admins must have a valid admin role assigned.
+- Admin actions are logged for auditing purposes.
+
+## Business Rules
+- Admins must authenticate using a valid admin account.
+- Admins can only perform actions within their scope of permissions.
+- Admin actions must comply with system policies and regulations.
+
+## Use Cases
+- **Create Event**: Admin creates a new event with specified details.
+- **Manage Users**: Admin adds, updates, or removes user accounts.
+- **Generate Reports**: Admin generates reports on system activity and user participation.
+- **Configure Settings**: Admin updates system settings and preferences.
+```
+
+- CommonUser.md
+
+```md
+# Common User
+
+## Description
+The `Common User` actor represents a regular user within the system who can participate in events. This actor can have the roles of `Attendant` and `Organizer`.
+
+## Responsibilities
+### As an Attendant
+- View available events.
+- Join and participate in events.
+- Provide feedback on events.
+
+### As an Organizer
+- Create and manage events.
+- Invite users to events.
+- Monitor event participation and feedback.
+
+## Restrictions
+- Common Users must have a valid user account.
+- Common Users can only join events that are active and not full.
+- Organizers can only manage events they have created.
+
+## Business Rules
+### As an Attendant
+- Attendants must authenticate using a valid user account.
+- Attendants can only join events they are eligible for.
+- Attendants must adhere to event rules and guidelines.
+
+### As an Organizer
+- Organizers must authenticate using a valid user account.
+- Organizers can only manage their own events.
+- Organizers must ensure events comply with system policies.
+
+## Use Cases
+### As an Attendant
+- **View Events**: Attendant views a list of available events.
+- **Join Event**: Attendant joins an event they are interested in.
+- **Leave Event**: Attendant leaves an event they no longer wish to participate in.
+- **Provide Feedback**: Attendant provides feedback on an event they attended.
+
+### As an Organizer
+- **Create Event**: Organizer creates a new event with specified details.
+- **Manage Event**: Organizer updates or deletes an event they created.
+- **Invite Users**: Organizer invites users to join their event.
+- **Monitor Participation**: Organizer monitors user participation and feedback for their events.
+```
