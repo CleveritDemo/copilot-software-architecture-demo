@@ -238,3 +238,96 @@ docs/
 ```
 @workspace /new Create a new project named docs with the following folders Entities, UseCases, Actors, Services and Diagrams. This project will contain the architecture documentation of the application that we are working on.
 ```
+
+## Paso 4. Construccion de la documentacion de las entidades.
+
+Le pedimos a Github Copilot que genere documentos markdown con la informacion de cada una de las entidades del sistema.
+
+**Prompt 7.**
+```
+@workspace I want you to create a markdown documentation file for each one of the entities of the system. These files must contain the following information: A detailed description of the entity explaining what it does. A table describing all the attributes of this entity and their data type. The business rules applyed to them and the relationship with other entities described. This files must be a markdown file.
+```
+
+En este caso genero los siguientes documentos:
+
+_Respuesta de Copilot_
+
+- Event.md
+
+```md
+# Event
+
+## Description
+The `Event` entity represents an event within the system. It includes details such as the event's title, description, date, creator, and state. Events can be active or finished and may include a Google Meet link for virtual meetings.
+
+## Attributes
+
+| Attribute       | Data Type | Description                                                                 | Business Rules                                                                 |
+|-----------------|-----------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `eventId`       | `String`  | Unique identifier for the event.                                            | Must be unique and non-null.                                                  |
+| `title`         | `String`  | Title of the event.                                                         | Must be non-null and non-empty.                                               |
+| `description`   | `String`  | Detailed description of the event.                                          | Optional.                                                                     |
+| `date`          | `Date`    | Date and time when the event is scheduled to occur.                         | Must be a valid date in the future.                                           |
+| `creatorUserId` | `String`  | Identifier of the user who created the event.                               | Must be a valid user ID.                                                      |
+| `state`         | `String`  | Current state of the event (active, finished).                              | Must be either 'active' or 'finished'.                                        |
+| `googleMeetLink`| `String`  | Link to the Google Meet for the event.                                       | Optional. Must be a valid URL if provided.                                    |
+
+## Relationships
+- An `Event` is created by a `User`.
+- An `Event` can have multiple `UserEvent` entries associated with it, representing users' participation status.
+```
+
+- UserEvent.md
+
+```md
+# UserEvent
+
+## Description
+The `UserEvent` entity represents the relationship between a user and an event. It includes details such as the user's participation status in the event.
+
+## Attributes
+
+| Attribute       | Data Type | Description                                                                 | Business Rules                                                                 |
+|-----------------|-----------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `userEventId`   | `String`  | Unique identifier for the user-event relationship.                          | Must be unique and non-null.                                                  |
+| `userId`        | `String`  | Identifier of the user participating in the event.                          | Must be a valid user ID.                                                      |
+| `eventId`       | `String`  | Identifier of the event the user is participating in.                       | Must be a valid event ID.                                                     |
+| `status`        | `String`  | Participation status of the user (accepted, declined).                      | Must be either 'accepted' or 'declined'.                                      |
+
+## Relationships
+- A `UserEvent` links a `User` to an `Event`.
+- A `User` can have multiple `UserEvent` entries, representing participation in multiple events.
+- An `Event` can have multiple `UserEvent` entries, representing multiple users' participation.
+```
+
+Nos percatamos que falta la entidad **User**, por lo tanto se la solicitamos.
+
+```
+@workspace Give me the markdown document for User entity
+```
+
+- User.md
+
+```md
+# User
+
+## Description
+The `User` entity represents a user within the system. It includes details such as the user's unique identifier, name, email, and role. Users can create events and participate in events.
+
+## Attributes
+
+| Attribute       | Data Type | Description                                                                 | Business Rules                                                                 |
+|-----------------|-----------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `userId`        | `String`  | Unique identifier for the user.                                             | Must be unique and non-null.                                                  |
+| `name`          | `String`  | Full name of the user.                                                      | Must be non-null and non-empty.                                               |
+| `email`         | `String`  | Email address of the user.                                                  | Must be a valid email address and unique.                                     |
+| `role`          | `String`  | Role of the user within the system (e.g., admin, participant).              | Must be either 'admin' or 'participant'.                                      |
+
+## Relationships
+- A `User` can create multiple `Event` entities.
+- A `User` can have multiple `UserEvent` entries, representing participation in multiple events.
+```
+
+> ⚠️ Importante
+>
+> Todos estos archivos generados, los guardamos en la carpeta `Entities` del proyecto
