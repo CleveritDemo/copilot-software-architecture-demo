@@ -1,0 +1,12 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (Manage Event) : Logs into the system
+(Manage Event) --> (Event Management Section) : Navigates to
+(Event Management Section) --> (Select Event) : Selects an event to manage
+(Select Event) --> (Update or Delete Event) : Updates or deletes the event
+(Update or Delete Event) --> (System) : Validates input and performs the action
+(System) --> (Event List) : Updates the event list
+(Event List) --> CU : Displays confirmation message
+
+@enduml

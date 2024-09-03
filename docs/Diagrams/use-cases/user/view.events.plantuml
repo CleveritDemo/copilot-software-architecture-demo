@@ -1,0 +1,8 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (View Events) : Logs into the system
+(View Events) --> (Events Section) : Navigates to
+(Events Section) --> (Display Events) : System displays a list of available events
+
+@enduml

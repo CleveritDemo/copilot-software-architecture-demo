@@ -1,0 +1,12 @@
+@startuml
+actor Admin as A
+
+A -> (Manage Users) : Logs into the system
+(Manage Users) --> (User Management Section) : Navigates to
+(User Management Section) --> (Select User) : Selects a user to manage
+(Select User) --> (Perform Action) : Performs the desired action (create, update, or delete user)
+(Perform Action) --> (System) : Validates input
+(System) --> (User List) : Updates the user list
+(User List) --> A : Displays confirmation message
+
+@enduml

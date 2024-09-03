@@ -461,3 +461,77 @@ The `Common User` actor represents a regular user within the system who can part
 - **Invite Users**: Organizer invites users to join their event.
 - **Monitor Participation**: Organizer monitors user participation and feedback for their events.
 ```
+
+## Paso 6 Construyendo los casos de uso y sus diagramas.
+
+**Prompt 10.**
+```
+@workspace Based on the business rules of this application/system, and also taking in count the documentation of the actors of the system #file:AdminUser.md and #file:CommonUser.md Create the Use Cases documents in a markdown file for each actor of the system. The use cases file must contain a table for each use case and inside the table will be a step by step description of the use case, also the use case shoud specify the prerequisites to be completed and the expected outcome.
+```
+
+### Archivos de caso de uso generados
+
+Al ejecutar el prompt anterior obtenemos los archivos de casos de uso para Actores del sistema obteniendo dos archivos llamados de la siguiente forma:
+
+- AdminUserUseCases.md
+- CommonUserUseCases.md
+
+### Diagramas de caso de uso generados mediante PlantUML con GitHub Copilot.
+
+Obtenidos los archivos de los casos de uso, procedemos a construir un prompt que permita la generacion de los diagramas de caso de uso mediante la herramienta de PlantUML, esta herramienta es una libreria que permite construir diagramas de diferentes tipos enfocandose en el lenguaje UML. Para este caso le pediremos que genere todos los diagramas de caso de uso de los actores del sistema.
+
+> ℹ️ Limite de tamaño de respuesta de Copilot.
+>
+> GitHub Copilot en ocasiones puede generar respuestas con una cantidad de caracteres bastante pronlongada, ocasionando que en ciertos momentos, se genere un mensaje de error indicando que se ha alcanzado el limite maximo de respuesta. Esto se soluciona parafraseando el prompt de forma que se limite el tamaño de la respuesta, o que se procese la respuesta mediante multiples prompts.
+
+Teniendo en cuenta lo anterior generaremos primero el diagrama de caso de uso para la creacion de eventos del Actor **Administrador**, posteriormente se generaran los demas casos de uso para dicho actor y luego repetimos el proceso para el actor **User**.
+
+**Prompt 11.**
+```
+@workspace You did a great job with those documents, now i need to create the use case diagrams for each one of the use cases for all of the Actors of the system. But let's start with only one first. Let's take the Create Event Use Case of the Admin Actor #file:AdminUserUseCases.md. Using PlantUML tool create file called create.event.case.plantuml that represents all the steps described in the table for this particular case.
+```
+
+Con este prompt se genera el codigo de PlantUML para el caso de uso de creacion de evento del actor **Admin**
+
+_Respuesta de Copilot:_
+
+- create.event.plantuml
+```PlantUML
+@startuml
+actor Admin as A
+
+A -> (Create Event) : Logs into the system
+(Create Event) --> (Event Management Section) : Navigates to
+(Event Management Section) --> (Create Event Form) : Clicks on "Create Event"
+(Create Event Form) --> A : Fills in event details
+A -> (Submit Event) : Submits the event creation form
+(Submit Event) --> (System) : Validates input
+(System) --> (Event List) : Creates the event
+(Event List) --> A : Displays confirmation message
+
+@enduml
+```
+
+Le indicamos a copilot que repita lo mismo con el resto de casos de uso del actor **Admin**:
+
+**Prompt 12.**
+```
+@workspace Do the same with all the other use cases of the Admin Actor #file:AdminUserUseCases.md
+```
+
+Esto generara un listado de archivos que se deben guardar en el directorio de: `docs/diagrams/use-cases/admin/`
+
+- create.event.plantuml
+- manage.users.plantuml
+- generate.reports.plantuml
+- configure.settings.plantuml
+
+Obtenidos los diagramas de caso de uso del actor administrador, procedemos a pedirle que realice lo mismo con el actor **User**, estos deben ser guardados en el directorio `docs/diagrams/use-cases/user`
+
+**Prompt 13.**
+```
+@workspace Repeat the process but now with all the User use cases. #file:CommonUserUseCases.md 
+```
+This will generate the following files:
+
+- 

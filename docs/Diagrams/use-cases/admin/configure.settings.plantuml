@@ -1,0 +1,12 @@
+@startuml
+actor Admin as A
+
+A -> (Configure Settings) : Logs into the system
+(Configure Settings) --> (Settings Section) : Navigates to
+(Settings Section) --> (Update Settings) : Updates the desired system settings
+(Update Settings) --> (Submit Settings) : Submits the settings update form
+(Submit Settings) --> (System) : Validates input
+(System) --> (Settings Confirmation) : Updates the settings
+(Settings Confirmation) --> A : Displays confirmation message
+
+@enduml
