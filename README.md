@@ -22,15 +22,16 @@ Se define un contexto base, que le indique a GitHub Copilot el tipo de usuario q
 > Finalizar los prompts con una pregunta, es una buena practica para que el modelo de lenguaje natural permanezca abierto a nuevos prompts, de forma que se establece una interaccion humano-maquina mas fluida y precisa.
 
 **Prompt 1.**
-```
+
+`
 Hi.! My name is Pablo, i'm a Software Engineer and I have a role as a Software Architect in my team. I want you to help me with some tasks related with software architecture and software design. Are you capable of that?. I know that you can write code, so i was thinking that you can help me to create documentation of a project using markdown files and also creating diagramas using code with tools like Mermaid or PlantUML. Also i want to generate code structures with an architecture called "Hexagonal Architecture", i haven't defined which programming language we are gonna use but probabily will be a oriented programing language. The diagrams that i have in mind are use case diagrams, sequence diagrams, class diagrams and maybe a Entity Relationship diagram. Probably i'm gonna need a couple of UML diagrams more but i'm ok with the current ones. Could you help me with this? Can you help me with these tasks if I provide you a context?
-```
+`
 
 _Respuesta de Copilot_
 
-```
+`
 Yes, I can help you with these tasks. Please provide the context or specific requirements for the documentation, diagrams, or code structures you need assistance with.
-```
+`
 
 Notese, que copilot queda abierto y disponible para completar solicitudes posteriores, esto es lo que se quiere lograr al proporcionar el contexto base.
 
@@ -39,15 +40,17 @@ Notese, que copilot queda abierto y disponible para completar solicitudes poster
 Se define el contexto del software/modulo/sistema/aplicación que se requiera desarrollar, con el objetivo de proporcionar a Copilot la información necesaria para que nos ayude a generar la documentación correspondiente. En este punto es muy importante, tratar de proporcionar el mayor detalle posible, por lo que mientras mas caracteristicas, reglas de negocio y restricciones indiquemos, mas eficiente seran las sugerencias que nos responda el modelo de lenguaje natural sobre el que funciona GitHub Copilot.
 
 **Prompt 2.**
-[Prompt en Español](./context-prompt-es.md)
-[Prompt en Ingles](./context-prompt.md)
+
+- [Prompt en Español](./context-prompt-es.md)
+- [Prompt en Ingles](./context-prompt.md)
 
 Al proporcionar todo el contexto de lo que el negocio nos ha indicado, Github Copilot nos debe responder algo como lo siguiente, indicando que tiene completo contexto de lo proporcionado.
 
 _Respuesta de GitHub Copilot:_
-```
+
+`
 Understood. I have processed the information you provided. The requirements and business rules are clear, and I understand the different modules that need to be implemented in the web application. Please proceed with your subsequent prompts, and I will assist you accordingly with generating the necessary diagrams and documentation.
-```
+`
 
 ## Paso 2. Identificacion de los actores y elementos del sistema.
 
@@ -62,9 +65,10 @@ En este punto identificaremos los actores dentro de la aplicacion web, entendien
 Le pediremos a copilot que identifique a los actores mediante un prompt y que genere documentacion sobre los mismos.
 
 **Prompt 3.**
-```
+
+`
 Give me a list of the actors of the system.
-```
+`
 _Respuesta de Copilot:_
 
 ```md
@@ -98,9 +102,10 @@ _Respuesta de Copilot:_
 Le pedimos a copilot que identifique elementos utiles como las entidades que conforman el sistema e interactuan entre si.
 
 **Prompt 4.**
-```
+
+`
 Give me a list of all the entities of the system including actors
-```
+`
 
 __Respuesta de Copilot__
 
@@ -141,13 +146,19 @@ Esta optimizacion se la hacemos saber a Copilot para que modifique las entidades
 
 **Prompt 5.**
 ```
-You did a good analysis on the system requirements, but there are some changes that need to be done in order to optimize this architecture.
+You did a good analysis on the system requirements, but there are some changes that need to be done 
+in order to optimize this architecture.
 
-1. A registered user can only have in reality two roles, common user and admin user. Only common users can be registed, admin users are built in the system as we mentioned earlier in the requirements.
+1. A registered user can only have in reality two roles, common user and admin user. 
+Only common users can be registed, admin users are built in the system as we mentioned earlier in the requirements.
 
-2. A organizer user isn't a role, in reality is a business rule that can be acomplished by adding a "creator_user" attribute into event entity.
+2. A organizer user isn't a role, in reality is a business rule that can be acomplished 
+by adding a "creator_user" attribute into event entity.
 
-3. A Attendee entity doesn't exist because a User can be both a organizer or a attendee, so all the attendees can be identified by a relationship between the users entity and the events entity, this relationship is a many to many relationship because a user can organize multiple events and also a user can be registered en multiple events.
+3. A Attendee entity doesn't exist because a User can be both a organizer or a attendee, 
+so all the attendees can be identified by a relationship between the users entity and the events entity, 
+this relationship is a many to many relationship because a user can organize multiple events 
+and also a user can be registered en multiple events.
 
 Take in count this statements and change the entities, actors and attributes accordingly
 ```
@@ -208,18 +219,19 @@ docs/
 
 **Prompt 6.**
 
-```
+`
 @workspace /new Create a new project named docs with the following folders Entities, UseCases, Actors, Services and Diagrams. This project will contain the architecture documentation of the application that we are working on.
-```
+`
 
 ## Paso 4. Construccion de la documentacion de las entidades.
 
 Le pedimos a Github Copilot que genere documentos markdown con la informacion de cada una de las entidades del sistema.
 
 **Prompt 7.**
-```
+
+`
 @workspace I want you to create a markdown documentation file for each one of the entities of the system. These files must contain the following information: A detailed description of the entity explaining what it does. A table describing all the attributes of this entity and their data type. The business rules applyed to them and the relationship with other entities described. This files must be a markdown file.
-```
+`
 
 En este caso genero los siguientes documentos:
 
@@ -314,9 +326,10 @@ Entendiendo esto, le pedimos a GitHub Copilot, que genere la documentacion de lo
 Le consultamos a copilot los actores del sistema, recordemos que anteriormente le habiamos solicitado identificarlos mas no documentarlos.
 
 **Prompt 8.**
-```
+
+`
 What are the actors of the system.
-```
+`
 
 _La respuesta de copilot:_
 
@@ -339,10 +352,16 @@ Admin User
 Por lo tanto le pediremos a GitHub Copilot mediante un prompt que genere una documentacion en archivos markdown de los actores considerando varios aspectos
 
 **Prompt 9.**
-```
-@workspace based on the actors of the system create the documentation file for each one of them. Containing the following information:
 
-1.A Detailed description of the actor. 2. The responsibilities of the actor. 3. The restrictions of the actor. 4. All the business rules applied to him. 5. All the use cases of the actor.
+```
+@workspace based on the actors of the system create the documentation file 
+for each one of them. Containing the following information:
+
+1. A Detailed description of the actor. 
+2. The responsibilities of the actor.
+3. The restrictions of the actor.
+4. All the business rules applied to him.
+5. All the use cases of the actor.
 ```
 
 ### Troubleshooting: En caso que genere actores diferentes
@@ -352,9 +371,10 @@ Para este caso GitHub Copilot nos ha generado actores diferentes a los que hemos
 Sin embargo esto no se adapta a las reglas de negocio completas previamente indicadas, ya que el actor **Participant** carece de las capacidades de crear eventos de un usuario **Organizer**. Por ende le pediremos a GitHub Copilot que haga enfasis en los actores previamente identificados **Common User** y **Admin User**, mediante un prompt.
 
 **Fix prompt (Only Apply if necessary)**
-```
+
+`
 @workspace Previuously you identified the actors of this system as "Common User" and "Admin User". In order to create this system, we need to keep those actors instead the actors you created recently, because all the business rules doesn't apply completely to the newer ones, so this means that "Common User" and "Admin User" must be keeped. Also take note that Common User have the business rules of a Attendant and Organizer, as you described prevously. 
-```
+`
 
 - AdminUser.md
 
@@ -438,9 +458,10 @@ The `Common User` actor represents a regular user within the system who can part
 ## Paso 6 Construyendo los casos de uso y sus diagramas.
 
 **Prompt 10.**
-```
+
+`
 @workspace Based on the business rules of this application/system, and also taking in count the documentation of the actors of the system #file:AdminUser.md and #file:CommonUser.md Create the Use Cases documents in a markdown file for each actor of the system. The use cases file must contain a table for each use case and inside the table will be a step by step description of the use case, also the use case shoud specify the prerequisites to be completed and the expected outcome.
-```
+`
 
 ### Archivos de caso de uso generados
 
@@ -460,15 +481,16 @@ Obtenidos los archivos de los casos de uso, procedemos a construir un prompt que
 Teniendo en cuenta lo anterior generaremos primero el diagrama de caso de uso para la creacion de eventos del Actor **Administrador**, posteriormente se generaran los demas casos de uso para dicho actor y luego repetimos el proceso para el actor **User**.
 
 **Prompt 11.**
-```
+
+`
 @workspace You did a great job with those documents, now i need to create the use case diagrams for each one of the use cases for all of the Actors of the system. But let's start with only one first. Let's take the Create Event Use Case of the Admin Actor #file:AdminUserUseCases.md. Using PlantUML tool create file called create.event.case.plantuml that represents all the steps described in the table for this particular case.
-```
+`
 
 Con este prompt se genera el codigo de PlantUML para el caso de uso de creacion de evento del actor **Admin**
 
 _Respuesta de Copilot:_
 
-- create.event.plantuml
+- create.event.plantuml (Archivo de Ejemplo)
 ```PlantUML
 @startuml
 actor Admin as A
@@ -488,9 +510,10 @@ A -> (Submit Event) : Submits the event creation form
 Le indicamos a copilot que repita lo mismo con el resto de casos de uso del actor **Admin**:
 
 **Prompt 12.**
-```
+
+`
 @workspace Do the same with all the other use cases of the Admin Actor #file:AdminUserUseCases.md
-```
+`
 
 Esto generara un listado de archivos que se deben guardar en el directorio de: `docs/diagrams/use-cases/admin/`
 
@@ -502,11 +525,12 @@ Esto generara un listado de archivos que se deben guardar en el directorio de: `
 Obtenidos los diagramas de caso de uso del actor administrador, procedemos a pedirle que realice lo mismo con el actor **User**, estos deben ser guardados en el directorio `docs/diagrams/use-cases/user`
 
 **Prompt 13.**
-```
-@workspace Repeat the process but now with all the User use cases. #file:CommonUserUseCases.md 
-```
-This will generate the following files:
 
+`
+@workspace Repeat the process but now with all the User use cases. #file:CommonUserUseCases.md 
+`
+
+This will generate the following files:
 - create.event.plantuml
 - invite.users.plantuml
 - join.event.plantuml
@@ -515,7 +539,6 @@ This will generate the following files:
 - monitor.participation.plantuml
 - provide.feedback.plantuml
 - view.events.plantuml
-
 
 ## Paso 7. Identificando modulos del sistema. Construccion de diagramas de secuencia.
 
@@ -526,11 +549,12 @@ Un punto muy importante en la construccion de todo software, es la identificacio
 Se consulta con copilot los modulos del sistema, para verificar que contextualmente disponga de la informacion correcta, en caso contrario realizaremos ajustes.
 
 **Prompt 14.**
-```
-@workspace Please, provide me a list with all the modules/services that are part of this system.
-```
-_Respuesta de Copilot_
 
+`
+@workspace Please, provide me a list with all the modules/services that are part of this system.
+`
+
+_Respuesta de Copilot_
 ```
 Based on the provided workspace structure and documentation, here is a list of all the modules/services that are part of this system:
 
@@ -570,14 +594,11 @@ Manages user responses to invitations.
 La respuesta de GitHub Copiot, esta acorde a todo lo que se ha desarrollado hasta el momento. Por lo que procederemos a indicarle que genere todos los archivos de documentacion markdown para estos servicios utilizando el agente @workspace dentro del directorio `docs/services`
 
 **Prompt 15.**
-```
-@workspace Elaborate all the markdown docs for each module/service of the system specifying a detailed description of the service, the entities involed, all the operations that can perform. As example the Invitation Management Service can be named as InvitationManagementService and can perform operations like:
 
-SendInvitationToUser()
-SendInvitationToUserWithAttachment()
-SendInvitationToExternalUser()
-RemoveInvitation()
-```
+`
+@workspace Elaborate all the markdown docs for each module/service of the system specifying a detailed description of the service, the entities involed, all the operations that can perform. As example the Invitation Management Service can be named as InvitationManagementService and can perform operations like:
+`
+`SendInvitationToUser(), SendInvitationToUserWithAttachment(), SendInvitationToExternalUser(), RemoveInvitation()`
 
 Copilot generara varios archivos markdown que guardaremos dentro del directorio `docs/services`.
 
@@ -624,9 +645,9 @@ Una vez obtenidos la documentacion relacionada a los modulos/servicios que forma
 
 **Prompt 16**
 
-```
+`
 @workspace Create all the sequence diagrams based on the use cases of each type of actor. #file:CommonUserUseCases.md #file:AdminUserUseCases.md. Take in count also the entities, the services and the actors of the system identified and generated in previous steps. Create all the diagrams using Mermaid.
-```
+`
 
 Esto generará dos archivos que contienen los diagramas de secuencia para las acciones y casos de uso existentes por cada actor del sistema
 
@@ -710,9 +731,11 @@ graph TD
 Empleando GitHub Copilot y con el contexto existente generaremos una estructura de proyecto para el aplicativo que se ha venido diseñando desde el comienzo de este practico. Mediante Copilot, generaremos un proyecto del tipo .NET Web App que emplee Clean Architecture o arquitectura hexagonal como tambien se le conoce. Y nos proporcione una estructura base sobre la cual partir.
 
 **Prompt 17**
-```
+`
 @workspace /new Based on all the documents created on this workspace, create a new .NET Web App for this event registration application using .NET 8 and Clean Architecture. This project must considerate all the entities, actors, services and use cases defined previously. The project must be under a solution file called DummyEventApp containing inside it the .NET Web app project. Also create a .gitignore file for this project. Do not left any file in blank generate al the necessesary code on each file. Do not generate a test project.
-```
+`
+
+Esto construira una aplicacion .NET 8 del tipo Web App, la cual contendra una estructura base similar a lo definido en este practico, de forma que puede modificarse y emplearse como plantilla para desarrollar este practico.
 
 ## Fin del practico. 😜
 
