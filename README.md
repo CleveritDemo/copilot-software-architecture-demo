@@ -715,3 +715,28 @@ Archivos Generados:
 
 - AdminSequenceDiagrams.md
 - CommonUserSequenceDiagrams.md
+
+## Paso 8. Generacion del proyecto base propuesto siguiendo los lineamientos de arquitectura hexagonal.
+
+La arquitectura hexagonal, también conocida como arquitectura de puertos y adaptadores, es un enfoque de diseño que busca separar las preocupaciones del núcleo de la aplicación de las preocupaciones externas, como la interfaz de usuario, las bases de datos y los servicios externos. En esta arquitectura, el núcleo de la aplicación se encuentra en el centro y está rodeado por puertos, que son interfaces que definen las interacciones con el exterior, y adaptadores, que implementan esas interfaces y se encargan de la comunicación con los componentes externos. Esto permite que el núcleo de la aplicación sea independiente de los detalles de implementación y sea más fácil de probar y mantener.
+
+```mermaid
+graph TD
+  A[Application Layer] --> B[Domain Layer]
+  A --> C[Infrastructure Layer]
+  B --> D[Interfaces]
+  B --> E[Use Cases]
+  C --> F[Frameworks & Drivers]
+  C --> G[Database]
+  D --> E
+  E --> B
+  F --> C
+  G --> C
+```
+
+Empleando GitHub Copilot y con el contexto existente generaremos una estructura de proyecto para el aplicativo que se ha venido diseñando desde el comienzo de este practico. Mediante Copilot, generaremos un proyecto del tipo .NET Web App que emplee Clean Architecture o arquitectura hexagonal como tambien se le conoce. Y nos proporcione una estructura base sobre la cual partir.
+
+**Prompt 17**
+```
+@workspace /new Based on all the documents created on this workspace, create a new .NET Web App for this event registration application using .NET 8 and Clean Architecture. This project must considerate all the entities, actors, services and use cases defined previously. The project must be under a solution file called DummyEventApp containing inside it the .NET Web app project. Also create a .gitignore file for this project. Do not left any file in blank generate al the necessesary code on each file. Do not generate a test project.
+```
