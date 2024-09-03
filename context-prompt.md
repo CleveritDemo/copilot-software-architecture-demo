@@ -30,3 +30,4 @@ An event can only be modified or deleted by the user who created it or by a syst
 **Open quiestion prompt for GitHub Copilot**
 
 Now that you have the complete context, do not give me results yet. First, process all the information I have given you, because I will provide you with several subsequent prompts that will indicate the diagrams I need to generate and the documentation I need you to construct using markdown files.
+

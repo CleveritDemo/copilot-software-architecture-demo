@@ -30,3 +30,4 @@ Se necesita crear una aplicacion web con la finalidad de poder crear eventos en 
 **Pregunta abierta para GitHub Copilot**
 
 Ahora que tienes el contexto completo, no me des resultados aun, primero procesa toda esta informacion que te he dado, porque te voy a proporcionar varios prompts posteriores que son los que te indicaran los diagramas que requiero generar y la documentacion que requiero que construyas mediante archivos markdown.
+
