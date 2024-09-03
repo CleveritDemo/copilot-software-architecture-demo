@@ -534,4 +534,12 @@ Obtenidos los diagramas de caso de uso del actor administrador, procedemos a ped
 ```
 This will generate the following files:
 
-- 
+- create.event.plantuml
+- invite.users.plantuml
+- join.event.plantuml
+- leave.event.plantuml
+- manage.event.plantuml
+- monitor.participation.plantuml
+- provide.feedback.plantuml
+- view.events.plantuml
+
