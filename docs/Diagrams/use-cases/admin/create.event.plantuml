@@ -1,0 +1,13 @@
+@startuml
+actor Admin as A
+
+A -> (Create Event) : Logs into the system
+(Create Event) --> (Event Management Section) : Navigates to
+(Event Management Section) --> (Create Event Form) : Clicks on "Create Event"
+(Create Event Form) --> A : Fills in event details
+A -> (Submit Event) : Submits the event creation form
+(Submit Event) --> (System) : Validates input
+(System) --> (Event List) : Creates the event
+(Event List) --> A : Displays confirmation message
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (Leave Event) : Logs into the system
+(Leave Event) --> (Joined Events Section) : Navigates to their list of joined events
+(Joined Events Section) --> (Select Event) : Selects an event to leave
+(Select Event) --> (Leave Event Button) : Clicks on "Leave Event"
+(Leave Event Button) --> (System) : Removes the user from the event
+(System) --> (Update User Event List) : Updates the user's event list
+(Update User Event List) --> CU : Displays confirmation message
+
+@enduml

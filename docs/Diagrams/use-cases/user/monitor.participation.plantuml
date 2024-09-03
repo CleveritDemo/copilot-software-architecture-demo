@@ -1,0 +1,10 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (Monitor Participation) : Logs into the system
+(Monitor Participation) --> (Event Management Section) : Navigates to
+(Event Management Section) --> (Select Event) : Selects an event to monitor
+(Select Event) --> (Display Participants) : System displays the list of participants and their feedback
+(Display Participants) --> CU : Reviews the participation and feedback
+
+@enduml

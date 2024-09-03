@@ -1,0 +1,12 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (Provide Feedback) : Logs into the system
+(Provide Feedback) --> (Attended Events Section) : Navigates to their list of attended events
+(Attended Events Section) --> (Select Event) : Selects an event to provide feedback on
+(Select Event) --> (Feedback Form) : Fills in the feedback form
+(Feedback Form) --> (Submit Feedback) : Submits the feedback form
+(Submit Feedback) --> (System) : Validates input and saves the feedback
+(System) --> (Confirmation Message) : Displays confirmation message
+
+@enduml

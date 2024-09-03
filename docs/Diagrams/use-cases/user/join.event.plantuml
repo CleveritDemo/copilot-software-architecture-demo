@@ -1,0 +1,12 @@
+@startuml
+actor CommonUser as CU
+
+CU -> (Join Event) : Logs into the system
+(Join Event) --> (Events Section) : Navigates to
+(Events Section) --> (Select Event) : Selects an event to join
+(Select Event) --> (Join Event Button) : Clicks on "Join Event"
+(Join Event Button) --> (System) : Validates user's eligibility
+(System) --> (Update User Event List) : Adds the user to the event
+(Update User Event List) --> CU : Displays confirmation message
+
+@enduml

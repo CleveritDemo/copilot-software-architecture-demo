@@ -1,0 +1,12 @@
+@startuml
+actor Admin as A
+
+A -> (Generate Reports) : Logs into the system
+(Generate Reports) --> (Reports Section) : Navigates to
+(Reports Section) --> (Select Report Type) : Selects the type of report to generate
+(Select Report Type) --> (Specify Parameters) : Specifies any filters or parameters for the report
+(Specify Parameters) --> (Submit Report Request) : Submits the report generation request
+(Submit Report Request) --> (System) : Generates the report
+(System) --> (Display Report) : Displays the generated report
+
+@enduml

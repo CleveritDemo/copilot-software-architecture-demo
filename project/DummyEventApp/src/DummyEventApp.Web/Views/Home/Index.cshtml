@@ -1,0 +1,20 @@
+@model DummyEventApp.Web.Models.ErrorViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Welcome to the Dummy Event App!</h1>
+
+@if (Model.ShowRequestId)
+{
+    <div class="alert alert-danger" role="alert">
+        <h3>Error</h3>
+        <p>An error occurred while processing your request.</p>
+        <p>Request ID: <strong>@Model.RequestId</strong></p>
+    </div>
+}
+else
+{
+    <p>This is the home page of the Dummy Event App. Start exploring the app by creating events, registering for events, and more!</p>
+}
