@@ -543,3 +543,175 @@ This will generate the following files:
 - provide.feedback.plantuml
 - view.events.plantuml
 
+
+## Paso 7. Identificando modulos del sistema. Construccion de diagramas de secuencia.
+
+Un punto muy importante en la construccion de todo software, es la identificacion de modulos o servicios del sistema. Esto se puede definir como aquellos elementos del sistema que por si solos no representan ninguna entidad, pero interactuan de una forma u otra en el proceso, es decir estos elementos forman parte de los procesos que interactuan con los actores.
+
+### Consultando a copilot los servicios/modulos del sistema.
+
+Se consulta con copilot los modulos del sistema, para verificar que contextualmente disponga de la informacion correcta, en caso contrario realizaremos ajustes.
+
+**Prompt 14.**
+```
+@workspace Please, provide me a list with all the modules/services that are part of this system.
+```
+_Respuesta de Copilot_
+
+```
+Based on the provided workspace structure and documentation, here is a list of all the modules/services that are part of this system:
+
+Event Management Service
+
+Responsible for creating, updating, and deleting events.
+Manages event details such as title, description, date, and state.
+Handles user participation in events.
+
+User Management Service
+
+Manages user accounts, including creating, updating, and deleting users.
+Handles user authentication and authorization.
+Manages user roles (e.g., Admin, Common User).
+
+Report Generation Service
+
+Generates reports on system activity and user participation.
+Provides various filters and parameters for report customization.
+
+System Configuration Service
+
+Manages system settings and preferences.
+Allows admins to configure various aspects of the system.
+
+Feedback Management Service
+
+Collects and manages user feedback on events.
+Provides mechanisms for users to submit feedback.
+
+Invitation Management Service
+
+Handles sending invitations to users for events.
+Manages user responses to invitations.
+```
+
+La respuesta de GitHub Copiot, esta acorde a todo lo que se ha desarrollado hasta el momento. Por lo que procederemos a indicarle que genere todos los archivos de documentacion markdown para estos servicios utilizando el agente @workspace dentro del directorio `docs/services`
+
+**Prompt 15.**
+```
+@workspace Elaborate all the markdown docs for each module/service of the system specifying a detailed description of the service, the entities involed, all the operations that can perform. As example the Invitation Management Service can be named as InvitationManagementService and can perform operations like:
+
+SendInvitationToUser()
+SendInvitationToUserWithAttachment()
+SendInvitationToExternalUser()
+RemoveInvitation()
+```
+
+Copilot generara varios archivos markdown que guardaremos dentro del directorio `docs/services`.
+
+**Ejemplo: EventManagementService.md**
+
+```md
+# EventManagementService
+
+## Description
+The `EventManagementService` is responsible for creating, updating, and deleting events. It manages event details such as title, description, date, and state. It also handles user participation in events.
+
+## Entities Involved
+- [`Event`](../Entities/Event.md)
+- [`UserEvent`](../Entities/UserEvent.md)
+
+## Operations
+- **CreateEvent(eventDetails)**
+  - Creates a new event with the specified details.
+- **UpdateEvent(eventId, updatedDetails)**
+  - Updates the details of an existing event.
+- **DeleteEvent(eventId)**
+  - Deletes an existing event.
+- **GetEvent(eventId)**
+  - Retrieves the details of a specific event.
+- **ListEvents()**
+  - Lists all available events.
+- **AddUserToEvent(userId, eventId)**
+  - Adds a user to an event.
+- **RemoveUserFromEvent(userId, eventId)**
+  - Removes a user from an event.
+```
+
+El resto de archivos generados son:
+
+- UserManagementService.md
+- ReportGenerationService.md
+- SystemConfigurationService.md
+- FeedbackManagementService.md
+- InvitationManagementService.md
+
+### Construyendo diagramas de secuencia.
+
+Una vez obtenidos la documentacion relacionada a los modulos/servicios que forman parte del sistema, podemos utilizar GitHub Copilot para generar los diagramas de secuencia teniendo en cuenta los casos de uso, actores, entidades y servicios. Para esto utilizaremos la herramienta de **Mermaid**, que permite construir diagramas dentro de archivos markdown.
+
+**Prompt 16**
+
+```
+@workspace Create all the sequence diagrams based on the use cases of each type of actor. #file:CommonUserUseCases.md #file:AdminUserUseCases.md. Take in count also the entities, the services and the actors of the system identified and generated in previous steps. Create all the diagrams using Mermaid.
+```
+
+Esto generará dos archivos que contienen los diagramas de secuencia para las acciones y casos de uso existentes por cada actor del sistema
+
+Ejemplo:
+
+```md
+# Sequence Diagrams
+
+## Admin Use Cases
+
+### Create Event
+
+sequenceDiagram
+    actor Admin
+    Admin ->> System: Logs into the system
+    Admin ->> EventManagementService: Navigates to the event management section
+    Admin ->> EventManagementService: Clicks on "Create Event"
+    Admin ->> EventManagementService: Fills in event details
+    Admin ->> EventManagementService: Submits the event creation form
+    EventManagementService ->> Event: Validates input and creates the event
+    EventManagementService ->> Admin: Displays confirmation message
+
+### Manage Users
+
+sequenceDiagram
+    actor Admin
+    Admin ->> System: Logs into the system
+    Admin ->> UserManagementService: Navigates to the user management section
+    Admin ->> UserManagementService: Selects a user to manage
+    Admin ->> UserManagementService: Performs the desired action (create, update, or delete user)
+    UserManagementService ->> User: Validates input and performs the action
+    UserManagementService ->> Admin: Displays confirmation message
+
+### Generate Reports
+
+sequenceDiagram
+    actor Admin
+    Admin ->> System: Logs into the system
+    Admin ->> ReportGenerationService: Navigates to the reports section
+    Admin ->> ReportGenerationService: Selects the type of report to generate
+    Admin ->> ReportGenerationService: Specifies any filters or parameters for the report
+    Admin ->> ReportGenerationService: Submits the report generation request
+    ReportGenerationService ->> Report: Generates the report
+    ReportGenerationService ->> Admin: Displays the generated report
+
+### Configure Settings
+
+sequenceDiagram
+    actor Admin
+    Admin ->> System: Logs into the system
+    Admin ->> SystemConfigurationService: Navigates to the settings section
+    Admin ->> SystemConfigurationService: Updates the desired system settings
+    Admin ->> SystemConfigurationService: Submits the settings update form
+    SystemConfigurationService ->> System: Validates input and updates the settings
+    SystemConfigurationService ->> Admin: Displays confirmation message
+```
+
+Archivos Generados:
+
+- AdminSequenceDiagrams.md
+- CommonUserSequenceDiagrams.md
