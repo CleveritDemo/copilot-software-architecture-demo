@@ -29,9 +29,10 @@ Hi.! My name is Pablo, i'm a Software Engineer and I have a role as a Software A
 
 _Respuesta de Copilot_
 
-`
-Yes, I can help you with these tasks. Please provide the context or specific requirements for the documentation, diagrams, or code structures you need assistance with.
-`
+```
+Yes, I can help you with these tasks. Please provide the context or specific requirements
+for the documentation, diagrams, or code structures you need assistance with.
+```
 
 Notese, que copilot queda abierto y disponible para completar solicitudes posteriores, esto es lo que se quiere lograr al proporcionar el contexto base.
 
