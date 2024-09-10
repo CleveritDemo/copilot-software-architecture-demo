@@ -225,9 +225,10 @@ docs/
 @workspace /new Create a new project named docs with the following folders Entities, UseCases, Actors, Services and Diagrams. This project will contain the architecture documentation of the application that we are working on.
 `
 
-## Paso 4. Construccion de la documentacion de las entidades.
+## Step 4. Building the documentation of the entities.
 
-Le pedimos a Github Copilot que genere documentos markdown con la informacion de cada una de las entidades del sistema.
+We ask GitHub Copilot to generate markdown documents with the information of each of the system's entities.
+
 
 **Prompt 7.**
 
