@@ -605,7 +605,7 @@ GitHub Copilot's response is consistent with everything that has been developed 
 `
 `SendInvitationToUser(), SendInvitationToUserWithAttachment(), SendInvitationToExternalUser(), RemoveInvitation()`
 
-Copilot generara varios archivos markdown que guardaremos dentro del directorio `docs/services`.
+The copilot will generate several markdown files that we will save within the directory. `docs/services`.
 
 **Ejemplo: EventManagementService.md**
 
