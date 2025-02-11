@@ -512,7 +512,7 @@ A -> (Submit Event) : Submits the event creation form
 @enduml
 ```
 
-Le indicamos a copilot que repita lo mismo con el resto de casos de uso del actor **Admin**:
+We instruct GitHub Copilot to repeat the same with the rest of the use cases of the **Admin** actor:
 
 **Prompt 12.**
 
@@ -520,14 +520,14 @@ Le indicamos a copilot que repita lo mismo con el resto de casos de uso del acto
 @workspace Do the same with all the other use cases of the Admin Actor #file:AdminUserUseCases.md
 `
 
-Esto generara un listado de archivos que se deben guardar en el directorio de: `docs/diagrams/use-cases/admin/`
+This will generate a list of files that must be saved in the directory of: `docs/diagrams/use-cases/admin/`
 
 - create.event.plantuml
 - manage.users.plantuml
 - generate.reports.plantuml
 - configure.settings.plantuml
 
-Obtenidos los diagramas de caso de uso del actor administrador, procedemos a pedirle que realice lo mismo con el actor **User**, estos deben ser guardados en el directorio `docs/diagrams/use-cases/user`
+Once the use case diagrams for the administrator actor have been obtained, we proceed to request GitHub Copilot to do the same for the **User** actor; these must be saved in the directory `docs/diagrams/use-cases/user`
 
 **Prompt 13.**
 
