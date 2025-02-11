@@ -202,6 +202,7 @@ Attributes: eventId, title, description, date, creatorUserId, state (active, fin
 Attributes: userEventId, userId, eventId, status (accepted, declined)
 
 These changes reflect the optimizations by simplifying the roles and relationships within the system.
+```
 
 ## Step 3. Building the workspace environment with the workspace agent
 
