@@ -105,9 +105,9 @@ We ask Copilot to identify useful elements such as the entities that make up the
 
 **Prompt 4.**
 
-`
+```
 Give me a list of all the entities of the system including actors
-`
+```
 
 __Copilot's Response__
 
@@ -147,6 +147,7 @@ If you look closely, Copilot provides a valid list of entities that are part of 
 We inform Copilot of this optimization so that it can modify the entities and their attributes.
 
 **Prompt 5.**
+
 ```
 You did a good analysis on the system requirements, but there are some changes that need to be done 
 in order to optimize this architecture.
