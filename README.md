@@ -68,9 +68,10 @@ We will ask Copilot to identify the actors through a prompt and generate documen
 
 **Prompt 3.**
 
-`
+```
 Give me a list of the actors of the system.
-`
+```
+
 _Copilot's Response:_
 
 ```md
@@ -97,7 +98,7 @@ _Copilot's Response:_
 - Can see a list of all users on the platform.
 - Can add, delete, and modify users.
 - Can delete and modify any event.
-
+```
 
 ### Identification of system elements and objects
 
