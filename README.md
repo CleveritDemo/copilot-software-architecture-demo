@@ -562,7 +562,6 @@ We consult with Copilot about the system modules to verify that it has the corre
 _Copilot's Response_
 ```
 Based on the provided workspace structure and documentation, here is a list of all the modules/services that are part of this system:
-```
 
 Event Management Service
 
@@ -748,4 +747,4 @@ This will build a .NET 8 Web App application, which will contain a base structur
 
 # Homework to do.!! 📕
 
-Como parte de practica para practicar despues, se sugiere generar los diagramas de clase partiendo de la base de la documentacion construida para generar las entidades y los servicios, es posible crear los diagramas de clase correspondientes al sistema.
+As part of practice for future application, it is suggested to generate the class diagrams based on the documentation created to generate the entities and services, it is possible to create the corresponding class diagrams for the system.
