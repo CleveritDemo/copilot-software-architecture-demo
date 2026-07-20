@@ -1,74 +1,328 @@
-# GitHub Copilot Software Architecture Demo
+<!-- markdownlint-disable MD033 MD041 -->
+<p align="center">
+  <img src="./images/header-en.svg" alt="GitHub Copilot — Software Architecture Workshop" />
+</p>
 
-This repository contains the demonstration project of the features and functionalities of GitHub Copilot applied to software architecture development. Using the GitHub Copilot Chat tool, a series of documents and guidelines are built to develop a software system from scratch.
+# GitHub Copilot — Software Architecture Workshop
 
-The objective of this demonstration is to show how to use GitHub Copilot to generate use case diagrams, sequence diagrams, and class diagrams, as well as to build a base structure using hexagonal architecture. These tools and approaches allow for efficient visualization and design of the software system, facilitating communication and collaboration among development team members. Additionally, GitHub Copilot speeds up the coding process by providing suggestions and automatically completing code snippets, increasing productivity and reducing errors. This demonstration is aimed at systems engineers with experience in software architecture.
+> Hands-on lab for designing and scaffolding a software system from scratch
+> using the **newest agentic features** of GitHub Copilot: **Agent Mode**,
+> **Custom Instructions**, **Prompt Files**, **context references**
+> (`#codebase`, `#file`, `#folder`), **MCP servers**, and **subagents**.
 
-## Requirements
+The workshop takes an event-registration application from an initial business
+brief all the way to a **hexagonal architecture .NET solution**, producing use
+case diagrams, sequence diagrams, and structured documentation along the
+way — with Copilot doing the multi-step work autonomously.
 
-- Visual Studio Code.
-- [PlantUML Diagram Extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml#:~:text=Features.%20Preview%20Diagram,%20Press%20Alt%20+%20D%20to%20start%20PlantUML)
-- [Mermaid Diagram Extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)
+> [Versión en español](./README-ESP.md)
 
-## Step 1. Defining the context.
+---
 
-For architecture tasks, it is important to provide the context of what we need Copilot to do for us. It is recommended to construct prompts where we indicate the type of user using the tool, as well as a detailed explanation and the role Copilot will take to define and build the architecture of the application we will develop.
+## Table of contents
 
-We will work on the following base prompts:
+- [Introduction](#introduction)
+- [Learning objectives](#learning-objectives)
+- [Workshop flow](#workshop-flow)
+- [Prerequisites](#prerequisites)
+- [Agentic Copilot features used in this workshop](#agentic-copilot-features-used-in-this-workshop)
+- [Step 1 · Defining the context](#step-1--defining-the-context)
+- [Step 2 · Identify actors and entities with Ask mode + `#codebase`](#step-2--identify-actors-and-entities-with-ask-mode--codebase)
+- [Step 3 · Build the workspace with Agent Mode](#step-3--build-the-workspace-with-agent-mode)
+- [Step 4 · Documentation of entities via a reusable Prompt File](#step-4--documentation-of-entities-via-a-reusable-prompt-file)
+- [Step 5 · Documentation of system actors](#step-5--documentation-of-system-actors)
+- [Step 6 · Use cases and PlantUML diagrams](#step-6--use-cases-and-plantuml-diagrams)
+- [Step 7 · Modules, services and Mermaid sequence diagrams](#step-7--modules-services-and-mermaid-sequence-diagrams)
+- [Step 8 · Hexagonal .NET scaffold with Agent Mode](#step-8--hexagonal-net-scaffold-with-agent-mode)
+- [Optional · MCP servers and subagents](#optional--mcp-servers-and-subagents)
+- [Homework](#homework)
+- [Repository structure](#repository-structure)
 
-### User base context
+---
 
-A base context is defined to indicate to GitHub Copilot the type of user using it, their role, and a series of tasks that need to be completed. This way, GitHub Copilot adjusts the level of knowledge, the area of knowledge, and the types of responses that will be returned.
+## Introduction
+
+This repository is a **demonstration workshop** of GitHub Copilot applied to
+software architecture. Using Copilot Chat you will build a series of design
+documents and code artifacts to develop a software system **from scratch**.
+
+The goal is not to teach UML or hexagonal architecture in depth, but to show
+how the **agentic capabilities** of Copilot — the ones released as part of
+Copilot Chat's Ask / Edit / **Agent** modes — accelerate the entire
+architecture workflow: use case diagrams, sequence diagrams, entity
+documentation, and a runnable project scaffold, all driven by natural language
+prompts that Copilot Agent Mode can execute autonomously.
+
+The workshop is targeted at systems engineers, software architects and senior
+developers already familiar with software design.
+
+---
+
+## Learning objectives
+
+By the end of the lab, participants will be able to:
+
+- **Persist project intent** in `.github/copilot-instructions.md` (or
+  `AGENTS.md`) so every Copilot Chat session in the repo starts with the
+  same context.
+- **Author reusable prompts** as `.prompt.md` files under
+  `.github/prompts/` and invoke them from any chat mode.
+- **Reference context precisely** using `#codebase`, `#file:<name>`,
+  `#folder:<path>`, `#symbol`, `#selection` and `#problems`.
+- **Drive multi-step work with Agent Mode**: let Copilot iterate over an
+  entire folder, generate coherent markdown, and run terminal commands
+  (`dotnet new`, `git`, PlantUML rendering) with checkpoint approval.
+- **Generate use case and sequence diagrams** in PlantUML and Mermaid,
+  keeping their content aligned with the entity/actor documentation.
+- **Scaffold a hexagonal-architecture .NET solution** that respects the
+  actors, entities, services and use cases defined earlier.
+- **Extend Copilot** with MCP servers and delegate exploration to a
+  **subagent** when the context grows large.
+
+---
+
+## Workshop flow
+
+<p align="center">
+  <img src="./images/workshop-flow.svg" alt="Workshop flow — from requirements to hexagonal scaffold" />
+</p>
+
+```mermaid
+flowchart LR
+    subgraph Setup["Setup (once per repo)"]
+        CI["copilot-instructions.md"]
+        PF["Prompt files<br/>.github/prompts/*.prompt.md"]
+    end
+
+    subgraph Design["Design with Ask / Agent modes"]
+        Ctx["Business context<br/>context-prompt.md"]
+        Ent["Actors + Entities"]
+        Docs["Markdown docs<br/>docs/Entities · docs/Actors"]
+        Diags["Diagrams<br/>PlantUML · Mermaid"]
+    end
+
+    subgraph Build["Build with Agent Mode"]
+        Scaffold["Hexagonal .NET solution"]
+    end
+
+    CI --> Ctx
+    PF --> Ent
+    Ctx --> Ent
+    Ent --> Docs
+    Docs --> Diags
+    Diags --> Scaffold
+```
+
+---
+
+## Prerequisites
+
+- **Visual Studio Code** (latest stable release).
+- **GitHub Copilot** and **GitHub Copilot Chat** extensions with an active
+  subscription that has **Agent Mode** enabled.
+- [PlantUML Diagram Extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) — required to preview `.plantuml` files.
+- [Mermaid Diagram Extension](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid) — required to preview Mermaid inside `.md` files.
+- [.NET 8 SDK](https://dotnet.microsoft.com/download) (only for the final scaffold step).
+- Java runtime (needed by the PlantUML extension to render diagrams).
+
+Verify your setup:
+
+```powershell
+code --version
+dotnet --version
+java -version
+```
+
+Open the folder that contains this README in VS Code, then open the
+**Copilot Chat** view (default shortcut on Windows: `Ctrl+Alt+I`).
+
+---
+
+## Agentic Copilot features used in this workshop
+
+The workshop assumes you know **that** these features exist. This table is a
+quick reference — the individual steps explain when and why to use them.
+
+| Feature | What it is | Where it lives |
+| ------- | ---------- | -------------- |
+| **Ask mode** | Chat that answers questions and generates snippets in the message thread. | Chat view · mode picker |
+| **Edit mode** | Chat that proposes multi-file edits you review before applying. | Chat view · mode picker |
+| **Agent Mode** | Autonomous mode that plans, edits files and runs tools until the goal is met, asking you to approve terminal commands. | Chat view · mode picker |
+| **Copilot Instructions** | Repo-wide, always-on system prompt. | `.github/copilot-instructions.md` or `AGENTS.md` |
+| **Instructions files** | Scoped instructions that apply to matching paths. | `.github/instructions/*.instructions.md` with `applyTo` frontmatter |
+| **Prompt files** | Reusable prompts callable from any mode. | `.github/prompts/*.prompt.md` |
+| **Custom chat modes** | Preset persona + toolset + instructions. | `.github/chatmodes/*.chatmode.md` |
+| **Context references** | Attach precise context to a message. | `#codebase`, `#file:<name>`, `#folder:<path>`, `#symbol`, `#selection`, `#problems`, `#terminalLastCommand`, `#fetch` |
+| **Chat participants** | Namespaced experts. | `@workspace`, `@vscode`, `@terminal`, `@github` |
+| **MCP servers** | Model Context Protocol tools plugged into Copilot. | `.vscode/mcp.json` |
+| **Subagents** | Delegate a focused task to a dedicated agent. | Agent Mode → `runSubagent` |
+| **Checkpoints** | Restore the workspace to a state before Agent Mode edits. | Chat view · checkpoint list |
 
 > 💡 **Tip**
 >
-> Ending prompts with a question is a good practice to keep the natural language model open to new prompts, establishing a more fluid and precise human-machine interaction.
+> Copilot Chat now exposes a **mode picker** (Ask / Edit / Agent). Every
+> screenshot in this workshop assumes **Agent Mode** unless stated otherwise.
 
-**Prompt 1.**
+<p align="center">
+  <img src="./images/step-02-agent-mode.svg" alt="Placeholder — selecting Agent Mode" width="720" />
+</p>
 
-`
-Hi! My name is Pablo, I'm a Software Engineer and I have a role as a Software Architect in my team. I want you to help me with some tasks related to software architecture and software design. Are you capable of that? I know that you can write code, so I was thinking that you can help me create documentation for a project using markdown files and also create diagrams using code with tools like Mermaid or PlantUML. Also, I want to generate code structures with an architecture called "Hexagonal Architecture". I haven't defined which programming language we are going to use but it will probably be an object-oriented programming language. The diagrams that I have in mind are use case diagrams and sequence diagrams. I might need a couple of more UML diagrams but I'm okay with the current ones. Could you help me with this? Can you help me with these tasks if I provide you with a context?
-`
+---
 
-_Copilot's Response_
+## Step 1 · Defining the context
 
-`Yes, I can help you with these tasks. Please provide the context or specific requirements for the documentation, diagrams, or code structures you need assistance with.
-`
+For architecture tasks Copilot needs **two layers of context**:
 
-Note that Copilot remains open and available to complete subsequent requests, which is what we want to achieve by providing the base context.
+1. **Who you are and what you expect** (persona + workflow rules) — this is
+   best captured **once**, in a Copilot Instructions file, so every future
+   chat starts pre-configured.
+2. **What the system is** (business rules, modules, restrictions) — better
+   supplied per-conversation via prompts or `#file` references.
 
-### Problem context
+### 1.1 · Persist your persona in a Copilot Instructions file
 
-The context of the software/module/system/application that needs to be developed is defined, with the objective of providing Copilot with the necessary information to help us generate the corresponding documentation. At this point, it is very important to try to provide as much detail as possible, so the more features, business rules, and constraints we indicate, the more efficient the suggestions from the natural language model on which GitHub Copilot operates will be.
+Instead of pasting the same "who am I" prompt at the start of every chat,
+create a repo-level instructions file. Copilot Chat automatically loads it in
+all three modes (Ask / Edit / Agent).
 
-**Prompt 2.**
+<p align="center">
+  <img src="./images/step-01-copilot-instructions.svg" alt="Placeholder — Copilot Instructions file" width="720" />
+</p>
 
-- [Prompt in Spanish](./context-prompt-es.md)
-- [Prompt in English](./context-prompt.md)
+Create `.github/copilot-instructions.md` with content along these lines:
 
-By providing all the context of what the business has indicated, GitHub Copilot should respond with something like the following, indicating that it has complete context of what was provided.
+```markdown
+# Software Architecture Workshop — Copilot Instructions
+
+You are pair-programming with **Pablo**, a Software Engineer acting as
+**Software Architect** on his team.
+
+Your role in this repository:
+
+- Help design and document software architectures using **hexagonal
+  architecture** (aka ports and adapters).
+- Produce Markdown documentation for entities, actors, use cases, services
+  and diagrams.
+- Author UML diagrams using **PlantUML** for use cases and **Mermaid** for
+  sequence and flow diagrams.
+- When the target implementation language is unspecified, prefer an
+  **object-oriented** language (default: C# with .NET 8).
+
+Conventions:
+
+- Every entity, actor and service gets its own Markdown file under `docs/`.
+- Use case files include a table with step-by-step flow, prerequisites and
+  expected outcome.
+- Do not add features, comments or docstrings that were not requested.
+- End answers with a short recap when running in Agent Mode.
+```
+
+> 🤓 **What changed vs. the classic approach**
+>
+> The original workshop had a *Prompt 1* that introduced Pablo and asked
+> Copilot "Are you capable of that?". That prompt still works, but it lives
+> only in a single chat session. A `copilot-instructions.md` file makes the
+> same persona persistent across **every** chat, every mode, every teammate.
+
+If you still want to run the original conversational opener, this remains
+valid — just note it is now optional:
+
+<details>
+<summary><strong>Prompt 1 (optional, legacy)</strong> — conversational persona opener</summary>
+
+```text
+Hi! My name is Pablo, I'm a Software Engineer and I have a role as a
+Software Architect in my team. I want you to help me with some tasks related
+to software architecture and software design. Are you capable of that? I
+know that you can write code, so I was thinking that you can help me create
+documentation for a project using markdown files and also create diagrams
+using code with tools like Mermaid or PlantUML. Also, I want to generate
+code structures with an architecture called "Hexagonal Architecture". I
+haven't defined which programming language we are going to use but it will
+probably be an object-oriented programming language. The diagrams that I
+have in mind are use case diagrams and sequence diagrams. I might need a
+couple of more UML diagrams but I'm okay with the current ones. Could you
+help me with this? Can you help me with these tasks if I provide you with a
+context?
+```
 
 _Copilot's Response:_
 
-`
-Understood. I have processed the information you provided. The requirements and business rules are clear, and I understand the different modules that need to be implemented in the web application. Please proceed with your subsequent prompts, and I will assist you accordingly with generating the necessary diagrams and documentation.
-`
+```text
+Yes, I can help you with these tasks. Please provide the context or
+specific requirements for the documentation, diagrams, or code structures
+you need assistance with.
+```
 
-## Step 2. Identification of system actors and elements.
+</details>
 
-### Identification of system actors
-
-At this point, we will identify the actors within the web application, understanding that actors are the different entities that interact with each other within a system and are governed by the business rules and constraints of the system.
-
-> 🤓 System Clarification
+> 💡 **Tip**
 >
-> Following the formal definition of a system as a set of interrelated and interdependent elements that work together to achieve a common goal. Under this premise, a web application is a system that falls under the paradigm of information systems, so from this point on, we will refer to it as a "system" instead of an "application".
+> Ending prompts with an open-ended question keeps the model receptive to
+> subsequent instructions, resulting in a smoother human-machine
+> interaction — this is why Prompt 2 (below) explicitly says *"I will send
+> you subsequent prompts"*.
 
-We will ask Copilot to identify the actors through a prompt and generate documentation about them.
+### 1.2 · The problem context
+
+The business context of the software / module / system to be built is
+supplied as a rich prompt. The more constraints, business rules and modules
+you spell out, the better Copilot's responses will be.
+
+**Prompt 2.**
+
+- [Prompt in English](./context-prompt.md)
+- [Prompt in Spanish](./context-prompt-es.md)
+
+Instead of pasting the whole thing, attach it as a **file reference** from
+Copilot Chat:
+
+```text
+#file:context-prompt.md
+
+Do not give me results yet. First, process all the information in the file
+above — those are the business rules for the system we are going to build
+together. I will send you subsequent prompts with the diagrams and
+documentation I need generated.
+```
+
+_Copilot's Response:_
+
+```text
+Understood. I have processed the information you provided. The requirements
+and business rules are clear, and I understand the different modules that
+need to be implemented in the web application. Please proceed with your
+subsequent prompts, and I will assist you accordingly with generating the
+necessary diagrams and documentation.
+```
+
+---
+
+## Step 2 · Identify actors and entities with Ask mode + `#codebase`
+
+Now that the persona (Step 1.1) and the problem (Step 1.2) are wired up,
+switch Copilot Chat to **Ask mode** to explore the domain without letting
+Copilot edit any file yet.
+
+<p align="center">
+  <img src="./images/step-04-context-refs.svg" alt="Placeholder — using #codebase and #file references" width="720" />
+</p>
+
+> 🤓 **System clarification**
+>
+> Following the formal definition of a system as *a set of interrelated and
+> interdependent elements working together toward a common goal*, a web
+> application is a system that falls under the paradigm of information
+> systems. From here on we refer to it as a "system" instead of an
+> "application".
+
+### 2.1 · List the actors
 
 **Prompt 3.**
 
-```
+```text
+#file:context-prompt.md
+
 Give me a list of the actors of the system.
 ```
 
@@ -100,19 +354,23 @@ _Copilot's Response:_
 - Can delete and modify any event.
 ```
 
-### Identification of system elements and objects
-
-We ask Copilot to identify useful elements such as the entities that make up the system and interact with each other.
+### 2.2 · List all entities
 
 **Prompt 4.**
 
-```
-Give me a list of all the entities of the system including actors
+```text
+#codebase
+
+Give me a list of all the entities of the system, including actors.
 ```
 
-__Copilot's Response__
+Using `#codebase` here tells Copilot to consider anything already indexed in
+the repo (currently only the two context prompts) in addition to the chat
+history.
 
-```
+_Copilot's Response:_
+
+```text
 Here is a list of all the entities of the system, including actors:
 
 Actors:
@@ -138,39 +396,46 @@ Attributes: invitationId, eventId, userId, emailSent (boolean), response (accept
 These entities and actors interact to fulfill the requirements and business rules of the system.
 ```
 
-If you look closely, Copilot provides a valid list of entities that are part of the web application being planned. However, there are some adjustments we can make, such as:
+### 2.3 · Refine the model
 
-- A registered user can actually have two roles: as a user or an administrator user.
-- The restriction of organizer user or attendee user exists only due to the relationship between the user and the event.
-- An organizer user can be identified as the creator of that event with an attribute called creator_user in the event entity.
-- Attendee users can be identified through a many-to-many relationship between the user and event entities, understanding that an event can have many registered users and a user can be registered in multiple events.
+Copilot has produced a valid list, but there are optimizations to apply:
+
+- A registered user really has only two roles: **common user** and **admin**.
+- "Organizer" is not a role — it is a business rule about the event creator.
+- No dedicated `Attendee` entity is needed; a user–event many-to-many
+  relationship covers it.
 
 We inform Copilot of this optimization so that it can modify the entities and their attributes.
 
 **Prompt 5.**
 
+```text
+You did a good analysis on the system requirements, but there are some
+changes that need to be done in order to optimize this architecture.
+
+1. A registered user can only have in reality two roles, common user and
+   admin user. Only common users can be registered — admin users are built
+   into the system as we mentioned earlier in the requirements.
+
+2. An organizer user isn't a role, in reality it is a business rule that can
+   be accomplished by adding a "creator_user" attribute into the event
+   entity.
+
+3. An Attendee entity doesn't exist because a User can be both an organizer
+   or an attendee, so all the attendees can be identified by a relationship
+   between the users entity and the events entity, this relationship is a
+   many-to-many relationship because a user can organize multiple events and
+   also a user can be registered in multiple events.
+
+Take into account these statements and change the entities, actors, and
+attributes accordingly.
 ```
-You did a good analysis on the system requirements, but there are some changes that need to be done 
-in order to optimize this architecture.
 
-1. A registered user can only have in reality two roles, common user and admin user. 
-Only common users can be registered, admin users are built into the system as we mentioned earlier in the requirements.
+_Copilot's Response:_
 
-2. An organizer user isn't a role, in reality, it is a business rule that can be accomplished 
-by adding a "creator_user" attribute into the event entity.
-
-3. An Attendee entity doesn't exist because a User can be both an organizer or an attendee, 
-so all the attendees can be identified by a relationship between the users entity and the events entity, 
-this relationship is a many-to-many relationship because a user can organize multiple events 
-and also a user can be registered in multiple events.
-
-Take into account these statements and change the entities, actors, and attributes accordingly.
-```
-
-Given the changes, Copilot should respond with something similar to the following:
-
-```
-Based on the provided optimizations, here is the updated list of actors and entities:
+```text
+Based on the provided optimizations, here is the updated list of actors and
+entities:
 
 Actors
 
@@ -201,49 +466,120 @@ Attributes: eventId, title, description, date, creatorUserId, state (active, fin
 - UserEvent
 Attributes: userEventId, userId, eventId, status (accepted, declined)
 
-These changes reflect the optimizations by simplifying the roles and relationships within the system.
+These changes reflect the optimizations by simplifying the roles and
+relationships within the system.
 ```
 
-## Step 3. Building the workspace environment with the workspace agent
+---
 
-With all the context defined and both the actors and entities of the system identified, we ask GitHub Copilot to use the @workspace /new agent to create a folder structure that follows the form below.
+## Step 3 · Build the workspace with Agent Mode
 
-```
+With the domain confirmed, switch Copilot Chat to **Agent Mode**. The
+autonomous agent replaces the legacy `@workspace /new` command: instead of
+scaffolding once, it can create folders, run `git`, and even ask you to
+approve `dotnet new` calls.
+
+<p align="center">
+  <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Agent Mode generating docs" width="720" />
+</p>
+
+Target folder structure:
+
+```text
 docs/
-    |
-    ---- Entities/
-    |
-    ---- Use Cases/
-    |
-    ---- Actors/
-    |
-    ---- Services/
-    |
-    ---- Diagrams/
+├── Entities/
+├── UseCases/
+├── Actors/
+├── Services/
+└── Diagrams/
 ```
 
 **Prompt 6.**
 
-`
-@workspace /new Create a new project named docs with the following folders Entities, UseCases, Actors, Services and Diagrams. This project will contain the architecture documentation of the application that we are working on.
-`
+```text
+Create a new folder called `docs/` at the repository root with the following
+subfolders:
 
-## Step 4. Building the documentation of the entities.
+- Entities/
+- UseCases/
+- Actors/
+- Services/
+- Diagrams/
 
-We ask GitHub Copilot to generate markdown documents with the information of each of the system's entities.
+This folder will contain the architecture documentation of the system we
+are working on.
+```
 
+> ⚠️ **Approve carefully**
+>
+> Agent Mode will list every file operation before applying it. Use the
+> checkpoint list in the chat view to review changes and, if anything goes
+> off-track, restore to the previous checkpoint in one click.
 
-**Prompt 7.**
+> 🧭 **Legacy note**
+>
+> The original workshop used `@workspace /new` to scaffold this folder.
+> Agent Mode is now the recommended, more general approach because it
+> preserves your existing files and gives you a checkpoint for undo.
 
-`
-@workspace I want you to create a markdown documentation file for each one of the entities of the system. These files must contain the following information: A detailed description of the entity explaining what it does. A table describing all the attributes of this entity and their data type. The business rules applyed to them and the relationship with other entities described. This files must be a markdown file.
-`
+---
 
-In this case, the following documents are generated:
+## Step 4 · Documentation of entities via a reusable Prompt File
 
-_Copilot's Response_
+The next several steps ("generate a Markdown file per entity", "per actor",
+"per service"…) have exactly the same shape. Extract the shape into a
+**prompt file** so you (and the rest of the team) can reuse it.
 
-- Event.md
+<p align="center">
+  <img src="./images/step-03-prompt-file.svg" alt="Placeholder — reusable prompt file" width="720" />
+</p>
+
+### 4.1 · Author the prompt file
+
+Ask Agent Mode to create it, or write it yourself:
+
+`.github/prompts/generate-entity-docs.prompt.md`
+
+````markdown
+---
+mode: agent
+description: Generate a Markdown documentation file for each entity of the system.
+tools: ['editFiles', 'search']
+---
+
+Goal: for every entity defined in the current system context, create one
+Markdown file under `docs/Entities/` named `<EntityName>.md`.
+
+Each file must contain:
+
+1. A detailed description of the entity, explaining its role.
+2. A table describing all attributes, their data type, description and the
+   business rules that apply to them.
+3. A "Relationships" section listing the connections with other entities.
+
+Constraints:
+
+- Do not create files for entities that already exist.
+- Use the entity list confirmed in the chat so far. If in doubt, reference
+  `#file:context-prompt.md` and the chat history.
+- Do not fabricate attributes not mentioned in the business rules.
+````
+
+### 4.2 · Invoke the prompt file
+
+In Copilot Chat, type `/` and pick `generate-entity-docs`, or reference it
+inline as `#prompt:generate-entity-docs`. In Agent Mode, Copilot will iterate
+over the entity list and produce the files.
+
+**Prompt 7.** (invocation)
+
+```text
+/generate-entity-docs
+```
+
+_Copilot's Response — generated files:_
+
+- `Event.md`
 
 ```md
 # Event
@@ -268,7 +604,7 @@ The `Event` entity represents an event within the system. It includes details su
 - An `Event` can have multiple `UserEvent` entries associated with it, representing users' participation status.
 ```
 
-- UserEvent.md
+- `UserEvent.md`
 
 ```md
 # UserEvent
@@ -291,13 +627,15 @@ The `UserEvent` entity represents the relationship between a user and an event. 
 - An `Event` can have multiple `UserEvent` entries, representing multiple users' participation.
 ```
 
-Nos percatamos que falta la entidad **User**, por lo tanto se la solicitamos.
+If the `User` entity is missing (Copilot may skip it because it is also an
+actor), ask for it explicitly:
 
-```
-@workspace Give me the markdown document for User entity
+```text
+Give me the markdown document for the User entity following the same
+structure. Save it under docs/Entities/.
 ```
 
-- User.md
+- `User.md`
 
 ```md
 # User
@@ -319,27 +657,33 @@ The `User` entity represents a user within the system. It includes details such 
 - A `User` can have multiple `UserEvent` entries, representing participation in multiple events.
 ```
 
-> ⚠️ Important
+> ⚠️ **Important**
 >
-> All these generated files are saved in the `Entities` folder of the project.
+> All these generated files are saved in the `docs/Entities/` folder. Verify
+> the checkpoint in the chat view before committing.
 
-## Step 5. Building the documentation of the system actors.
+---
 
-Actors represent entities that interact and are governed by the business rules described by the business. An entity can be represented by multiple actors depending on the use case and workflow.
+## Step 5 · Documentation of system actors
 
-Understanding this, we ask GitHub Copilot to generate the documentation of the actors participating in the system. These will be saved in the `docs/Actors` directory.
+Actors represent entities that interact and are governed by the business
+rules of the domain. An entity can be represented by multiple actors
+depending on the use case and the workflow.
 
-We ask Copilot about the actors of the system, remembering that we previously asked it to identify them but not to document them.
+### 5.1 · Confirm the actor list
+
+Since we already narrowed the actors in Step 2, a short Ask-mode question
+confirms Copilot still holds the right context:
 
 **Prompt 8.**
 
-`
-What are the actors of the system.
-`
+```text
+What are the actors of the system?
+```
 
 _Copilot's Response:_
 
-```
+```text
 Common User
 - Can create events.
 - Can be invited to events.
@@ -355,34 +699,66 @@ Admin User
 - Can delete and modify any event.
 ```
 
-Therefore, we will ask GitHub Copilot through a prompt to generate documentation in markdown files for the actors considering various aspects.
+### 5.2 · Generate the actor docs (Prompt File pattern)
+
+Author `.github/prompts/generate-actor-docs.prompt.md`:
+
+````markdown
+---
+mode: agent
+description: Generate a Markdown documentation file for each actor of the system.
+tools: ['editFiles', 'search']
+---
+
+Goal: for every actor confirmed in the chat context, create one Markdown
+file under `docs/Actors/` named `<ActorName>.md`.
+
+Each file must contain:
+
+1. A detailed description of the actor.
+2. Their responsibilities.
+3. Their restrictions.
+4. All business rules that apply to them.
+5. All their use cases.
+
+Constraints:
+
+- Use exactly the actor names confirmed in the chat: **Common User** and
+  **Admin User** (unless the chat says otherwise).
+- If the actor list includes anything else, stop and ask for confirmation.
+````
 
 **Prompt 9.**
 
-```
-@workspace based on the actors of the system create the documentation file 
-for each one of them. Containing the following information:
-
-1. A Detailed description of the actor. 
-2. The responsibilities of the actor.
-3. The restrictions of the actor.
-4. All the business rules applied to him.
-5. All the use cases of the actor.
+```text
+/generate-actor-docs
 ```
 
-### Troubleshooting: In case different actors are generated
+### 5.3 · Troubleshooting — different actors generated
 
-In this case, GitHub Copilot has generated different actors than those we have been handling. Specifically, it has generated the following actors: **Participant** and **Admin**.
+If Copilot invents new actors (for example **Participant** and **Admin**
+instead of the ones we confirmed), the **Participant** actor lacks the
+"organizer" capabilities we defined earlier. Reset the context with the
+classic fix prompt — it still works verbatim:
 
-However, this does not fully adapt to the previously indicated business rules, as the **Participant** actor lacks the capabilities to create events like an **Organizer** user. Therefore, we will ask GitHub Copilot to emphasize the previously identified actors **Common User** and **Admin User** through a prompt.
+<details>
+<summary><strong>Fix prompt (apply only if needed)</strong></summary>
 
-**Fix prompt (Only Apply if necessary)**
+```text
+Previously you identified the actors of this system as "Common User" and
+"Admin User". In order to create this system, we need to keep those actors
+instead of the actors you created recently, because all the business rules
+don't apply completely to the newer ones. This means that "Common User" and
+"Admin User" must be kept. Also, take note that Common User has the
+business rules of both an Attendant and Organizer, as you described
+previously.
+```
 
-`
-@workspace Previously you identified the actors of this system as "Common User" and "Admin User". In order to create this system, we need to keep those actors instead of the actors you created recently, because all the business rules don't apply completely to the newer ones. This means that "Common User" and "Admin User" must be kept. Also, take note that Common User has the business rules of both an Attendant and Organizer, as you described previously.
-`
+</details>
 
-- AdminUser.md
+_Copilot's Response — generated files:_
+
+- `AdminUser.md`
 
 ```md
 # Admin User
@@ -461,41 +837,93 @@ The `Common User` actor represents a regular user within the system who can part
 - **Monitor Participation**: Organizer monitors user participation and feedback for their events.
 ```
 
-## Step 6 Building the use cases and their diagrams.
+---
+
+## Step 6 · Use cases and PlantUML diagrams
+
+Same pattern: define one prompt file that turns *"the actor docs + the
+business context"* into structured use case tables, and another that
+converts a use case into a PlantUML diagram.
+
+<p align="center">
+  <img src="./images/step-06-plantuml.svg" alt="Placeholder — rendered PlantUML diagram" width="720" />
+</p>
+
+### 6.1 · Generate use case documents
+
+Author `.github/prompts/generate-use-cases.prompt.md`:
+
+````markdown
+---
+mode: agent
+description: Generate use case documentation per actor.
+tools: ['editFiles', 'search']
+---
+
+Based on the business rules of this application and the actor documentation
+in #folder:docs/Actors, create the Use Cases documents in Markdown, one per
+actor, under `docs/UseCases/`.
+
+Each file must contain, for every use case:
+- A table with a step-by-step description of the flow.
+- The prerequisites that must be completed.
+- The expected outcome.
+````
 
 **Prompt 10.**
 
-`
-@workspace Based on the business rules of this application/system, and also taking into account the documentation of the actors of the system #file:AdminUser.md and #file:CommonUser.md Create the Use Cases documents in a markdown file for each actor of the system. The use cases file must contain a table for each use case and inside the table will be a step by step description of the use case, also the use case shoud specify the prerequisites to be completed and the expected outcome.
-`
+```text
+/generate-use-cases
+```
 
-##
+Result:
 
-By executing the previous prompt, we obtain the use case files for the system actors, resulting in two files named as follows:
+- `AdminUserUseCases.md`
+- `CommonUserUseCases.md`
 
-- AdminUserUseCases.md
-erU- CommonUserUseCases.md
+### 6.2 · Generate PlantUML use case diagrams
 
-### Use Case Diagrams Generated with PlantUML using GitHub Copilot
+Author `.github/prompts/generate-use-case-diagram.prompt.md`:
 
-After obtaining the use case files, we proceed to construct a prompt that allows the generation of use case diagrams using the PlantUML tool. This tool is a library that enables the construction of various types of diagrams focusing on the UML language. In this case, we will ask it to generate all the use case diagrams for the system actors.
+````markdown
+---
+mode: agent
+description: Generate a PlantUML use case diagram from a use case description.
+tools: ['editFiles']
+---
 
+Given a specific use case referenced by the user, create a `.plantuml` file
+under `docs/Diagrams/use-cases/<actor>/` named `<use-case>.plantuml` that
+represents all the steps described in that use case.
 
-> GitHub Copilot can sometimes generate responses with a quite prolonged character count, causing an error message to appear indicating that the maximum response limit has been reached. This can be resolved by rephrasing the prompt to limit the response size or by processing the response through multiple prompts.
+Constraints:
 
-Taking this into account, we will first generate the use case diagram for event creation for the **Administrator** Actor. Subsequently, we will generate the other use cases for this actor and then repeat the process for the **User** actor.
+- Use `@startuml`/`@enduml`.
+- One diagram = one use case.
+- If the response would exceed the model's output cap, split it: generate
+  the requested file and reply "continue?" so the user can trigger the next
+  one.
+````
 
-**Prompt 11.**
+> ℹ️ **Response size limits**
+>
+> Copilot occasionally returns "maximum response length reached". When that
+> happens, generate one file at a time using this prompt file, or ask
+> Copilot to *"produce only the PlantUML for `<use case>` and stop"*.
 
-`
-@workspace You did a great job with those documents, now i need to create the use case diagrams for each one of the use cases for all of the Actors of the system. But let's start with only one first. Let's take the Create Event Use Case of the Admin Actor #file:AdminUserUseCases.md. Using PlantUML tool create file called create.event.case.plantuml that represents all the steps described in the table for this particular case.
-`
+**Prompt 11.** (single-case)
 
-With this prompt, the PlantUML code for the event creation use case of the **Admin** actor is generated.
+```text
+/generate-use-case-diagram
 
-_Copilot's Response:_
+Use case: **Create Event** for the **Admin** actor
+(see #file:docs/UseCases/AdminUserUseCases.md).
 
-- create.event.plantuml (Example File)
+Save the diagram as create.event.plantuml.
+```
+
+_Copilot's Response — example file `create.event.plantuml`:_
+
 ```PlantUML
 @startuml
 actor Admin as A
@@ -512,56 +940,73 @@ A -> (Submit Event) : Submits the event creation form
 @enduml
 ```
 
-We instruct GitHub Copilot to repeat the same with the rest of the use cases of the **Admin** actor:
+### 6.3 · Batch the remaining diagrams
+
+Rather than looping in Ask mode, delegate the batch to **Agent Mode**:
 
 **Prompt 12.**
 
-`
-@workspace Do the same with all the other use cases of the Admin Actor #file:AdminUserUseCases.md
-`
+```text
+Using the diagram prompt file above, generate the PlantUML file for every
+remaining use case of the Admin actor
+(#file:docs/UseCases/AdminUserUseCases.md). Save them under
+`docs/Diagrams/use-cases/admin/`.
+```
 
-This will generate a list of files that must be saved in the directory of: `docs/diagrams/use-cases/admin/`
+Expected files under `docs/Diagrams/use-cases/admin/`:
 
-- create.event.plantuml
-- manage.users.plantuml
-- generate.reports.plantuml
-- configure.settings.plantuml
-
-Once the use case diagrams for the administrator actor have been obtained, we proceed to request GitHub Copilot to do the same for the **User** actor; these must be saved in the directory `docs/diagrams/use-cases/user`
+- `create.event.plantuml`
+- `manage.users.plantuml`
+- `generate.reports.plantuml`
+- `configure.settings.plantuml`
 
 **Prompt 13.**
 
-`
-@workspace Repeat the process but now with all the User use cases. #file:CommonUserUseCases.md 
-`
+```text
+Repeat the batch for every use case of the Common User
+(#file:docs/UseCases/CommonUserUseCases.md), saving into
+`docs/Diagrams/use-cases/user/`.
+```
 
-This will generate the following files:
-- create.event.plantuml
-- invite.users.plantuml
-- join.event.plantuml
-- leave.event.plantuml
-- manage.event.plantuml
-- monitor.participation.plantuml
-- provide.feedback.plantuml
-- view.events.plantuml
+Expected files under `docs/Diagrams/use-cases/user/`:
 
-## Step 7. Identifying system modules. Building sequence diagrams.
+- `create.event.plantuml`
+- `invite.users.plantuml`
+- `join.event.plantuml`
+- `leave.event.plantuml`
+- `manage.event.plantuml`
+- `monitor.participation.plantuml`
+- `provide.feedback.plantuml`
+- `view.events.plantuml`
 
-A very important point in the construction of any software is the identification of system modules or services. These can be defined as those elements of the system that by themselves do not represent any entity but interact in one way or another in the process. In other words, these elements are part of the processes that interact with the actors.
+---
 
-### Consulting Copilot about the system services/modules.
+## Step 7 · Modules, services and Mermaid sequence diagrams
 
-We consult with Copilot about the system modules to verify that it has the correct contextual information. If not, we will make adjustments.
+Modules or services are the elements of the system that do not represent
+any single entity but participate in the workflows that connect actors and
+entities.
+
+<p align="center">
+  <img src="./images/step-07-mermaid.svg" alt="Placeholder — rendered Mermaid sequence diagram" width="720" />
+</p>
+
+### 7.1 · Confirm the service list
 
 **Prompt 14.**
 
-`
-@workspace Please, provide me a list with all the modules/services that are part of this system.
-`
+```text
+#codebase
 
-_Copilot's Response_
+Please, provide me a list with all the modules/services that are part of
+this system.
 ```
-Based on the provided workspace structure and documentation, here is a list of all the modules/services that are part of this system:
+
+_Copilot's Response:_
+
+```text
+Based on the provided workspace structure and documentation, here is a list
+of all the modules/services that are part of this system:
 
 Event Management Service
 
@@ -596,18 +1041,28 @@ Handles sending invitations to users for events.
 Manages user responses to invitations.
 ```
 
-GitHub Copilot's response is consistent with everything that has been developed so far. Therefore, we will proceed to instruct it to generate all the markdown documentation files for these services using the @workspace agent within the `docs/services` directory.
+### 7.2 · Generate the service docs
+
+Copilot's response is consistent with the domain so far. Ask Agent Mode to
+turn it into one Markdown file per service under `docs/Services/`:
 
 **Prompt 15.**
 
-`
-@workspace Elaborate all the markdown docs for each module/service of the system specifying a detailed description of the service, the entities involed, all the operations that can perform. As example the Invitation Management Service can be named as InvitationManagementService and can perform operations like:
-`
-`SendInvitationToUser(), SendInvitationToUserWithAttachment(), SendInvitationToExternalUser(), RemoveInvitation()`
+```text
+Create one Markdown file per module/service listed above under
+`docs/Services/`. Each file must contain:
 
-The copilot will generate several markdown files that we will save within the directory. `docs/services`.
+- A detailed description of the service.
+- The entities it involves (link to the corresponding entity docs).
+- All the operations it can perform.
 
-**Ejemplo: EventManagementService.md**
+Example naming for the Invitation Management Service:
+InvitationManagementService.md, with operations like
+SendInvitationToUser(), SendInvitationToUserWithAttachment(),
+SendInvitationToExternalUser(), RemoveInvitation().
+```
+
+**Example: `EventManagementService.md`**
 
 ```md
 # EventManagementService
@@ -636,35 +1091,39 @@ The `EventManagementService` is responsible for creating, updating, and deleting
   - Removes a user from an event.
 ```
 
-El resto de archivos generados son:
+Other generated files:
 
-- UserManagementService.md
-- ReportGenerationService.md
-- SystemConfigurationService.md
-- FeedbackManagementService.md
-- InvitationManagementService.md
+- `UserManagementService.md`
+- `ReportGenerationService.md`
+- `SystemConfigurationService.md`
+- `FeedbackManagementService.md`
+- `InvitationManagementService.md`
 
-### Building Sequence Diagrams
+### 7.3 · Build the sequence diagrams (Mermaid)
 
-Once the documentation related to the modules/services that are part of the system is obtained, we can use GitHub Copilot to generate the sequence diagrams considering the use cases, actors, entities, and services. For this, we will use the **Mermaid** tool, which allows building diagrams within markdown files.
+**Prompt 16.**
 
-**Prompt 16**
+```text
+#folder:docs
 
-`
-@workspace Create all the sequence diagrams based on the use cases of each type of actor. #file:CommonUserUseCases.md #file:AdminUserUseCases.md. Take into account also the entities, the services, and the actors of the system identified and generated in previous steps. Create all the diagrams using Mermaid.
-`
+Create all the sequence diagrams based on the use cases of each type of
+actor (see #file:docs/UseCases/CommonUserUseCases.md and
+#file:docs/UseCases/AdminUserUseCases.md). Consider also the entities, the
+services and the actors identified and generated in previous steps. Create
+all the diagrams using **Mermaid** and save them as Markdown files with
+Mermaid code blocks under `docs/Diagrams/sequence/`.
+```
 
-This will generate two files containing the sequence diagrams for the actions and existing use cases for each actor in the system.
+_Excerpt from the generated `AdminSequenceDiagrams.md`:_
 
-Ejemplo:
-
-```md
+````md
 # Sequence Diagrams
 
 ## Admin Use Cases
 
 ### Create Event
 
+```mermaid
 sequenceDiagram
     actor Admin
     Admin ->> System: Logs into the system
@@ -674,9 +1133,11 @@ sequenceDiagram
     Admin ->> EventManagementService: Submits the event creation form
     EventManagementService ->> Event: Validates input and creates the event
     EventManagementService ->> Admin: Displays confirmation message
+```
 
 ### Manage Users
 
+```mermaid
 sequenceDiagram
     actor Admin
     Admin ->> System: Logs into the system
@@ -685,9 +1146,11 @@ sequenceDiagram
     Admin ->> UserManagementService: Performs the desired action (create, update, or delete user)
     UserManagementService ->> User: Validates input and performs the action
     UserManagementService ->> Admin: Displays confirmation message
+```
 
 ### Generate Reports
 
+```mermaid
 sequenceDiagram
     actor Admin
     Admin ->> System: Logs into the system
@@ -697,9 +1160,11 @@ sequenceDiagram
     Admin ->> ReportGenerationService: Submits the report generation request
     ReportGenerationService ->> Report: Generates the report
     ReportGenerationService ->> Admin: Displays the generated report
+```
 
 ### Configure Settings
 
+```mermaid
 sequenceDiagram
     actor Admin
     Admin ->> System: Logs into the system
@@ -709,15 +1174,22 @@ sequenceDiagram
     SystemConfigurationService ->> System: Validates input and updates the settings
     SystemConfigurationService ->> Admin: Displays confirmation message
 ```
+````
 
-Files generated:
+Generated files:
 
-- AdminSequenceDiagrams.md
-- CommonUserSequenceDiagrams.md
+- `AdminSequenceDiagrams.md`
+- `CommonUserSequenceDiagrams.md`
 
-## Step 8. Generation of the proposed base project following the guidelines of hexagonal architecture.
+---
 
-Hexagonal architecture, also known as ports and adapters architecture, is a design approach that aims to separate the core concerns of the application from external concerns, such as the user interface, databases, and external services. In this architecture, the core of the application is located at the center and is surrounded by ports, which are interfaces that define interactions with the outside world, and adapters, which implement those interfaces and handle communication with external components. This allows the core of the application to remain independent of implementation details, making it easier to test and maintain.
+## Step 8 · Hexagonal .NET scaffold with Agent Mode
+
+Hexagonal architecture (a.k.a. ports and adapters) separates the core of the
+application — domain rules and use cases — from external concerns such as
+UI, databases and third-party services. The core is surrounded by **ports**
+(interfaces) and **adapters** (concrete implementations), which makes the
+core easy to test and evolve independently.
 
 ```mermaid
 graph TD
@@ -733,18 +1205,150 @@ graph TD
   G --> C
 ```
 
-Using GitHub Copilot and with the existing context, we will generate a project structure for the application that has been designed from the beginning of this exercise. Through Copilot, we will generate a .NET Web App project that employs Clean Architecture, also known as hexagonal architecture. This will provide us with a base structure from which to start.
+<p align="center">
+  <img src="./images/step-08-agent-scaffold.svg" alt="Placeholder — Agent Mode scaffolding the .NET solution" width="720" />
+</p>
 
-**Prompt 17**
-`
-@workspace /new Based on all the documents created on this workspace, create a new .NET Web App for this event registration application using .NET 8 and Clean Architecture. This project must considerate all the entities, actors, services and use cases defined previously. The project must be under a solution file called DummyEventApp containing inside it the .NET Web app project. Also create a .gitignore file for this project. Do not left any file in blank generate al the necessesary code on each file. Do not generate a test project.
-`
+Ask **Agent Mode** to scaffold the solution. Because Agent Mode can run
+terminal commands (after asking your permission), it will call `dotnet new`
+directly instead of just writing files by hand.
 
-This will build a .NET 8 Web App application, which will contain a base structure similar to what is defined in this exercise, so that it can be modified and used as a template to develop this exercise.
+**Prompt 17.**
 
-## End of the practice. 😜
+```text
+Based on all the documents already created in this workspace
+(#folder:docs), scaffold a new .NET Web App for this event-registration
+application using .NET 8 and Clean / Hexagonal Architecture.
 
+The project must:
 
-# Homework to do.!! 📕
+- Live under a solution file named `DummyEventApp.sln` that contains the
+  .NET Web App project (and the additional class-library projects needed
+  for a hexagonal layout: Domain, Application, Infrastructure).
+- Model every entity, actor, service and use case defined previously.
+- Include a `.gitignore` tailored for .NET.
+- Not leave any generated file empty — populate the necessary code in each
+  file.
+- Not include a test project.
 
-As part of practice for future application, it is suggested to generate the class diagrams based on the documentation created to generate the entities and services, it is possible to create the corresponding class diagrams for the system.
+Use `dotnet new` commands from the integrated terminal to create the
+projects. Ask me to approve each terminal call before running it. After
+each command, verify the file layout with the workspace tools and continue
+until the solution builds with `dotnet build`.
+```
+
+> ⚠️ **Reviewing terminal commands**
+>
+> Agent Mode will pop up a confirmation for every terminal call. Read each
+> command before approving. If Copilot proposes a destructive command (for
+> example `rm -rf`), reject it and rephrase your prompt.
+
+> 🧭 **Legacy note**
+>
+> The classic workshop used `@workspace /new` for this final step. Agent
+> Mode is strictly more powerful here: it can chain multiple `dotnet new`
+> calls, wire projects together, and self-verify by running `dotnet build`.
+
+---
+
+## Optional · MCP servers and subagents
+
+Copilot can be extended with **MCP servers** (Model Context Protocol) and
+can **delegate exploration to a subagent** when the workspace grows.
+
+### Attach an MCP server
+
+Create `.vscode/mcp.json` at the repo root to declare servers. Example
+skeleton — enable only what you use:
+
+```jsonc
+{
+  "servers": {
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"]
+    },
+    "plantuml": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-plantuml"]
+    }
+  }
+}
+```
+
+After VS Code reloads the MCP configuration, the tools exposed by each
+server become available inside Agent Mode. Typical wins for this workshop:
+
+- A **GitHub** MCP server lets Copilot create the branch / PR that publishes
+  the generated documentation.
+- A **PlantUML** MCP server (or the local extension) can render the diagrams
+  from Step 6 without leaving VS Code.
+
+### Delegate to a subagent
+
+When the context window fills up (long chats, many files), spawn a subagent
+to keep the main conversation focused:
+
+```text
+Delegate to a subagent: "Explore #folder:docs and produce a one-page audit
+of missing use cases, entities without documentation, and services that
+have no matching sequence diagram."
+```
+
+The subagent returns a single summary that you can paste back into the main
+chat as context — no more re-reading the whole `docs/` tree in Agent Mode.
+
+---
+
+## Homework
+
+- Generate the **class diagrams** from the entity and service documentation
+  (PlantUML `@startuml`/`@enduml` with `class` blocks). A `.prompt.md` for
+  this is a natural addition to `.github/prompts/`.
+- Author a `.chatmode.md` file called **`architect.chatmode.md`** that
+  bundles the persona from Step 1.1 with the prompt files from Steps 4–7,
+  so onboarding a new architect to the repo is a single mode selection.
+- Convert one of the sequence diagrams into an actual controller /
+  application service in the .NET scaffold from Step 8, keeping the code
+  aligned with the documentation.
+
+---
+
+## Repository structure
+
+```text
+copilot-software-architecture-demo/
+├── README.md              # This file (English)
+├── README-ESP.md          # Spanish version
+├── context-prompt.md      # Business context (English) — referenced by #file
+├── context-prompt-es.md   # Business context (Spanish) — referenced by #file
+└── images/                # Header banners, workshop-flow, step placeholders
+    ├── header-en.svg
+    ├── header-es.svg
+    ├── workshop-flow.svg
+    ├── step-01-copilot-instructions.svg
+    ├── step-02-agent-mode.svg
+    ├── step-03-prompt-file.svg
+    ├── step-04-context-refs.svg
+    ├── step-05-agent-generating.svg
+    ├── step-06-plantuml.svg
+    ├── step-07-mermaid.svg
+    ├── step-08-agent-scaffold.svg
+    └── README.md          # Placeholder / capture inventory
+```
+
+As you run the workshop, the `docs/`, `.github/prompts/` and
+`DummyEventApp/` folders will appear — created by Copilot Agent Mode in
+Steps 3, 4 and 8 respectively.
+
+---
+
+## End of the practice 🎉
+
+Everything you have generated (entity docs, actor docs, use case tables,
+diagrams and the .NET scaffold) came from natural-language prompts that
+Copilot Agent Mode executed autonomously — no `@workspace /new` required.
+The persona and shape of every recurring task now lives as
+`copilot-instructions.md` + prompt files that any teammate can reuse. 🚀

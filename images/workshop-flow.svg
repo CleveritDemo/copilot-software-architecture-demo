@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-label="Workshop flow — from requirements to hexagonal scaffold">
+  <defs>
+    <linearGradient id="bgFlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="cardFlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accentFlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="520" fill="url(#bgFlow)"/>
+
+  <text x="640" y="50" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="700" fill="#f0f6fc">
+    End-to-end workshop flow
+  </text>
+  <text x="640" y="80" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" fill="#8b949e">
+    Requirements  →  Custom Instructions  →  Prompt Files  →  Agent Mode  →  Hexagonal .NET scaffold
+  </text>
+
+  <!-- Row 1: Setup -->
+  <g font-family="'Segoe UI', system-ui, sans-serif">
+    <!-- Card 1 -->
+    <g transform="translate(60,130)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#a78bfa" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#a78bfa" font-weight="600">STEP 1</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Copilot Instructions</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">.github/copilot-instructions.md</text>
+    </g>
+    <!-- Card 2 -->
+    <g transform="translate(340,130)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#a78bfa" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#a78bfa" font-weight="600">STEP 2</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Prompt Files</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">.github/prompts/*.prompt.md</text>
+    </g>
+    <!-- Card 3 -->
+    <g transform="translate(620,130)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#60a5fa" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#60a5fa" font-weight="600">STEP 3</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Ask Mode</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">Actors &amp; entities with #codebase</text>
+    </g>
+    <!-- Card 4 -->
+    <g transform="translate(900,130)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#60a5fa" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#60a5fa" font-weight="600">STEP 4</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Agent Mode</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">Multi-step doc generation</text>
+    </g>
+
+    <!-- Row 2: Modeling -->
+    <!-- Card 5 -->
+    <g transform="translate(60,300)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#22d3ee" font-weight="600">STEP 5</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Diagrams</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">PlantUML use cases</text>
+    </g>
+    <!-- Card 6 -->
+    <g transform="translate(340,300)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#22d3ee" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#22d3ee" font-weight="600">STEP 6</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Sequence Diagrams</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">Mermaid + services</text>
+    </g>
+    <!-- Card 7 -->
+    <g transform="translate(620,300)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#f472b6" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#f472b6" font-weight="600">STEP 7</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">MCP + Subagents</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">Verify &amp; explore</text>
+    </g>
+    <!-- Card 8 -->
+    <g transform="translate(900,300)">
+      <rect width="240" height="110" rx="14" fill="url(#cardFlow)" stroke="#f472b6" stroke-width="2"/>
+      <text x="120" y="35" text-anchor="middle" font-size="14" fill="#f472b6" font-weight="600">STEP 8</text>
+      <text x="120" y="65" text-anchor="middle" font-size="18" fill="#f0f6fc" font-weight="700">Hexagonal .NET</text>
+      <text x="120" y="88" text-anchor="middle" font-size="12" fill="#8b949e">Agent scaffolds project</text>
+    </g>
+  </g>
+
+  <!-- Arrows connecting cards -->
+  <g stroke="#22d3ee" stroke-width="2" fill="none">
+    <!-- row 1 arrows -->
+    <line x1="300" y1="185" x2="340" y2="185" marker-end="url(#arrow)"/>
+    <line x1="580" y1="185" x2="620" y2="185" marker-end="url(#arrow)"/>
+    <line x1="860" y1="185" x2="900" y2="185" marker-end="url(#arrow)"/>
+    <!-- transition from row 1 to row 2 (right-to-left snake) -->
+    <path d="M 1020 240 C 1020 275, 180 275, 180 300" marker-end="url(#arrow)"/>
+    <!-- row 2 arrows -->
+    <line x1="300" y1="355" x2="340" y2="355" marker-end="url(#arrow)"/>
+    <line x1="580" y1="355" x2="620" y2="355" marker-end="url(#arrow)"/>
+    <line x1="860" y1="355" x2="900" y2="355" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="640" y="475" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" fill="#6e7681" font-style="italic">
+    Each step reinforces reusable context that Copilot Agent Mode uses to keep coherence across the entire workshop.
+  </text>
+</svg>

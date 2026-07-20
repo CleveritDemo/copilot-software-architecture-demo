@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-label="GitHub Copilot Software Architecture Workshop">
+  <defs>
+    <linearGradient id="bgEn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="55%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="accentEn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="glowEn" cx="20%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="360" fill="url(#bgEn)"/>
+  <rect width="1280" height="360" fill="url(#glowEn)"/>
+
+  <!-- Hexagon honeycomb (right side) representing hexagonal architecture -->
+  <g stroke="url(#accentEn)" stroke-width="2" fill="none" opacity="0.55">
+    <!-- Row 1 -->
+    <polygon points="900,80 960,45 1020,80 1020,150 960,185 900,150"/>
+    <polygon points="1080,80 1140,45 1200,80 1200,150 1140,185 1080,150"/>
+    <!-- Row 2 (offset) -->
+    <polygon points="990,150 1050,115 1110,150 1110,220 1050,255 990,220"/>
+    <polygon points="1170,150 1230,115 1290,150 1290,220 1230,255 1170,220"/>
+    <!-- Row 3 -->
+    <polygon points="900,220 960,185 1020,220 1020,290 960,325 900,290"/>
+    <polygon points="1080,220 1140,185 1200,220 1200,290 1140,325 1080,290"/>
+  </g>
+  <g fill="url(#accentEn)" opacity="0.18">
+    <polygon points="990,150 1050,115 1110,150 1110,220 1050,255 990,220"/>
+  </g>
+
+  <!-- Copilot spark icon -->
+  <g transform="translate(80,110)" fill="url(#accentEn)">
+    <path d="M 30 0 L 36 24 L 60 30 L 36 36 L 30 60 L 24 36 L 0 30 L 24 24 Z"/>
+  </g>
+
+  <!-- Text block -->
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+    <text x="170" y="150" font-size="56" font-weight="700" fill="#f0f6fc">GitHub Copilot</text>
+    <text x="170" y="210" font-size="38" font-weight="600" fill="url(#accentEn)">Software Architecture Workshop</text>
+    <text x="170" y="255" font-size="18" font-weight="400" fill="#8b949e" letter-spacing="1">
+      Agent Mode  ·  Custom Instructions  ·  Prompt Files  ·  MCP  ·  Subagents
+    </text>
+    <text x="170" y="295" font-size="14" font-weight="400" fill="#6e7681" font-style="italic">
+      From requirements to hexagonal architecture with the newest agentic features
+    </text>
+  </g>
+
+  <!-- Bottom accent -->
+  <rect x="0" y="356" width="1280" height="4" fill="url(#accentEn)"/>
+</svg>
