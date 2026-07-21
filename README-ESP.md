@@ -498,7 +498,8 @@ llamadas a `dotnet new`.
   <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Modo Agente generando docs" width="720" />
 </p>
 
-Estructura de carpetas objetivo:
+Estructura de carpetas objetivo (las subcarpetas de `Diagrams/` aparecen
+en los Pasos 6 y 7 — se anticipan aquí como referencia):
 
 ```text
 docs/
@@ -507,6 +508,10 @@ docs/
 ├── Actors/
 ├── Services/
 └── Diagrams/
+    ├── use-cases/
+    │   ├── admin/         # Diagramas PlantUML (Paso 6)
+    │   └── user/
+    └── sequence/          # Diagramas Mermaid (Paso 7)
 ```
 
 **Prompt 6.**
@@ -1256,6 +1261,23 @@ El proyecto debe:
   en cada archivo.
 - No incluir un proyecto de tests.
 
+Cablea los proyectos así:
+
+- `Application` referencia a `Domain`.
+- `Infrastructure` referencia a `Application`.
+- `Web` referencia a `Application` **y** `Infrastructure`.
+
+Como `Application` e `Infrastructure` son bibliotecas de clases que
+exponen métodos de extensión sobre `IServiceCollection`
+(`AddApplication()` / `AddInfrastructure()`), necesitan los siguientes
+paquetes NuGet — agrégalos explícitamente y pinea la versión para que
+coincida con el target framework:
+
+- `Application`: `Microsoft.Extensions.DependencyInjection.Abstractions`.
+- `Infrastructure`: `Microsoft.Extensions.DependencyInjection.Abstractions`
+  y `Microsoft.Extensions.Logging.Abstractions` (necesario si algún
+  adaptador loguea).
+
 Usa comandos `dotnet new` desde la terminal integrada para crear los
 proyectos. Pídeme aprobación antes de ejecutar cada llamada. Después de
 cada comando, verifica el layout con las herramientas del workspace y
@@ -1267,6 +1289,13 @@ continúa hasta que la solución compile con `dotnet build`.
 > El Modo Agente mostrará una confirmación por cada comando. Léelo antes
 > de aprobar. Si Copilot propone un comando destructivo (por ejemplo
 > `rm -rf`), rechaza y reformula tu prompt.
+
+> 💡 **Fijar versión de NuGet**
+>
+> Evita `dotnet add package … --no-restore` sin `--version` — escribe
+> `Version="*"` (la más alta disponible) en el `.csproj`, lo que puede
+> derivar con el tiempo y saltar de major version. Pinéa a versiones
+> `8.0.*` (coincidiendo con `net8.0`) para reproducibilidad.
 
 > 🧭 **Nota legacy**
 >

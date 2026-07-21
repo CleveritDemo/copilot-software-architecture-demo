@@ -483,7 +483,8 @@ approve `dotnet new` calls.
   <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Agent Mode generating docs" width="720" />
 </p>
 
-Target folder structure:
+Target folder structure (the `Diagrams/` subfolders are introduced by
+Steps 6 and 7 — mentioned here for reference):
 
 ```text
 docs/
@@ -492,6 +493,10 @@ docs/
 ├── Actors/
 ├── Services/
 └── Diagrams/
+    ├── use-cases/
+    │   ├── admin/         # PlantUML diagrams (Step 6)
+    │   └── user/
+    └── sequence/          # Mermaid diagrams (Step 7)
 ```
 
 **Prompt 6.**
@@ -1231,6 +1236,22 @@ The project must:
   file.
 - Not include a test project.
 
+Wire the projects like this:
+
+- `Application` references `Domain`.
+- `Infrastructure` references `Application`.
+- `Web` references `Application` **and** `Infrastructure`.
+
+Because `Application` and `Infrastructure` are class libraries that expose
+`IServiceCollection` extension methods (`AddApplication()` /
+`AddInfrastructure()`) they need the following NuGet packages — add them
+explicitly and pin the version to match the target framework:
+
+- `Application`: `Microsoft.Extensions.DependencyInjection.Abstractions`.
+- `Infrastructure`: `Microsoft.Extensions.DependencyInjection.Abstractions`
+  and `Microsoft.Extensions.Logging.Abstractions` (needed if any adapter
+  logs).
+
 Use `dotnet new` commands from the integrated terminal to create the
 projects. Ask me to approve each terminal call before running it. After
 each command, verify the file layout with the workspace tools and continue
@@ -1242,6 +1263,13 @@ until the solution builds with `dotnet build`.
 > Agent Mode will pop up a confirmation for every terminal call. Read each
 > command before approving. If Copilot proposes a destructive command (for
 > example `rm -rf`), reject it and rephrase your prompt.
+
+> 💡 **NuGet pinning**
+>
+> Avoid `dotnet add package … --no-restore` without a `--version` — it
+> writes `Version="*"` (highest available) into the `.csproj`, which can
+> drift with time and cross-major-version releases. Pin to `8.0.*`
+> versions (matching `net8.0`) for reproducibility.
 
 > 🧭 **Legacy note**
 >
