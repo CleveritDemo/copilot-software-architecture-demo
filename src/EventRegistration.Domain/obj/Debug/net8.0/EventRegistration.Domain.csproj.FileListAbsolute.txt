@@ -1,0 +1,12 @@
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\bin\Debug\net8.0\EventRegistration.Domain.deps.json
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\bin\Debug\net8.0\EventRegistration.Domain.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\bin\Debug\net8.0\EventRegistration.Domain.pdb
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.AssemblyInfoInputs.cache
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.AssemblyInfo.cs
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.csproj.CoreCompileInputs.cache
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.sourcelink.json
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\refint\EventRegistration.Domain.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\EventRegistration.Domain.pdb
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Domain\obj\Debug\net8.0\ref\EventRegistration.Domain.dll

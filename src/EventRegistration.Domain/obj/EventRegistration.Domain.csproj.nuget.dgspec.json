@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {}
+    "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {}
   },
   "projects": {
-    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+    "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
         "projectName": "EventRegistration.Domain",
-        "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
+        "projectPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\obj\\",
+        "outputPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
