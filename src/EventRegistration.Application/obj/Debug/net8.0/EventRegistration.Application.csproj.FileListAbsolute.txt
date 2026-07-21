@@ -1,0 +1,16 @@
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\bin\Debug\net8.0\EventRegistration.Application.deps.json
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\bin\Debug\net8.0\EventRegistration.Application.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\bin\Debug\net8.0\EventRegistration.Application.pdb
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\bin\Debug\net8.0\EventRegistration.Domain.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\bin\Debug\net8.0\EventRegistration.Domain.pdb
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.csproj.AssemblyReference.cache
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.AssemblyInfoInputs.cache
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.AssemblyInfo.cs
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.csproj.CoreCompileInputs.cache
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.sourcelink.json
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventReg.AAE10956.Up2Date
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\refint\EventRegistration.Application.dll
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\EventRegistration.Application.pdb
+C:\Users\rodri\architecture-demo\copilot-software-architecture-demo\src\EventRegistration.Application\obj\Debug\net8.0\ref\EventRegistration.Application.dll

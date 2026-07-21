@@ -51,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
       "projectName": "EventRegistration.Infrastructure",
-      "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -70,11 +70,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj": {
-              "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj"
+            "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj": {
+              "projectPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj"
             },
-            "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
-              "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj"
+            "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+              "projectPath": "C:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj"
             }
           }
         }
