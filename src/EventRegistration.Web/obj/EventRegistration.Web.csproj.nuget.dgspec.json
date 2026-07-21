@@ -1,0 +1,278 @@
+{
+  "format": 1,
+  "restore": {
+    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Web\\EventRegistration.Web.csproj": {}
+  },
+  "projects": {
+    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj",
+        "projectName": "EventRegistration.Application",
+        "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.316/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
+        "projectName": "EventRegistration.Domain",
+        "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.316/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
+        "projectName": "EventRegistration.Infrastructure",
+        "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj"
+              },
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.316/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Web\\EventRegistration.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Web\\EventRegistration.Web.csproj",
+        "projectName": "EventRegistration.Web",
+        "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Web\\EventRegistration.Web.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Application\\EventRegistration.Application.csproj"
+              },
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Domain\\EventRegistration.Domain.csproj"
+              },
+              "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj": {
+                "projectPath": "c:\\Users\\rodri\\architecture-demo\\copilot-software-architecture-demo\\src\\EventRegistration.Infrastructure\\EventRegistration.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.29, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.316/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
