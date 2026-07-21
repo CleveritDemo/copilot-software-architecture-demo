@@ -1,0 +1,40 @@
+@startuml delete.account
+
+title Eliminar cuenta — Usuario Común
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder a Eliminar cuenta" as UC1
+  usecase "Confirmar eliminación" as UC2
+
+  usecase "Verificar eventos activos como organizador" as S1
+  usecase "Eliminar User y sus filas UserEvent" as S2
+  usecase "Cerrar sesión y redirigir al login" as S3
+
+  usecase "Bloquear eliminación por eventos activos (Regla 13)" as A1
+}
+
+UC --> UC1
+UC --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el usuario es organizador de
+  eventos activos. Se muestra
+  la lista de eventos que deben
+  finalizar antes de eliminar
+  la cuenta.
+end note
+
+@enduml

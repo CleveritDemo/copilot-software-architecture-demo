@@ -1,0 +1,35 @@
+@startuml delete.own.event
+
+title Eliminar evento — Usuario Común (rol funcional: organizador)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder al detalle del evento propio" as UC1
+  usecase "Seleccionar Eliminar evento y confirmar" as UC2
+
+  usecase "Verificar que el usuario es el creador (Regla 5)" as S1
+  usecase "Eliminar Event y sus filas UserEvent" as S2
+
+  usecase "Denegar acceso: no es el creador" as A1
+}
+
+UC --> UC1
+UC --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el usuario no es el creador
+  del evento. Acceso denegado.
+end note
+
+@enduml

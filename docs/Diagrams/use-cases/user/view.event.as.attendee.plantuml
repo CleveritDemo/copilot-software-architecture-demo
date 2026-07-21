@@ -1,0 +1,23 @@
+@startuml view.event.as.attendee
+
+title Ver detalle de evento como asistente — Usuario Común (rol funcional: asistente)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Seleccionar evento aceptado en el módulo de contenido" as UC1
+
+  usecase "Verificar la fila UserEvent (status = aceptado)" as S1
+  usecase "Mostrar información básica (sin listado de asistentes, Regla 12)" as S2
+}
+
+UC --> UC1
+
+UC1 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+
+@enduml

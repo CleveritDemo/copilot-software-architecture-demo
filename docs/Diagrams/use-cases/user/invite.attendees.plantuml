@@ -1,0 +1,38 @@
+@startuml invite.attendees
+
+title Invitar asistentes — Usuario Común (rol funcional: organizador)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder al detalle propio y elegir Invitar asistentes" as UC1
+  usecase "Seleccionar usuarios y confirmar" as UC2
+
+  usecase "Mostrar selector de usuarios registrados" as S1
+  usecase "Crear UserEvent por cada invitado (sin status)" as S2
+  usecase "Enviar correo con información y enlace de respuesta" as S3
+
+  usecase "Notificar duplicado: usuario ya invitado" as A1
+}
+
+UC --> UC1
+UC --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+
+S2 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el usuario ya está invitado.
+  Se omite el duplicado y se
+  notifica al organizador.
+end note
+
+@enduml

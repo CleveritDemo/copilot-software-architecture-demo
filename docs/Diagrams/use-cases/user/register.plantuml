@@ -1,0 +1,48 @@
+@startuml register
+
+title Registrarse en la aplicación — Usuario Común
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Abrir formulario de registro" as UC1
+  usecase "Ingresar datos personales" as UC2
+  usecase "Enviar formulario" as UC3
+
+  usecase "Validar formato de campos" as S1
+  usecase "Validar unicidad de username y email" as S2
+  usecase "Cifrar contraseña y persistir User (role = común)" as S3
+  usecase "Redirigir al login con mensaje de confirmación" as S4
+
+  usecase "Mostrar error de username o email duplicado" as A1
+  usecase "Resaltar campos inválidos y no enviar" as A2
+}
+
+UC --> UC1
+UC --> UC2
+UC --> UC3
+
+UC3 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+S3 ..> S4 : <<include>>
+
+S1 ..> A2 : <<extend>>
+S2 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  username o email duplicado.
+  No se persiste el User.
+end note
+
+note right of A2
+  Flujo alternativo A2:
+  validación de formato fallida.
+end note
+
+@enduml

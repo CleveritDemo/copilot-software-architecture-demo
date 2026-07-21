@@ -1,0 +1,41 @@
+@startuml manage.account
+
+title Gestionar cuenta — Usuario Común
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder al módulo de cuenta" as UC1
+  usecase "Modificar campos deseados" as UC2
+  usecase "Guardar cambios" as UC3
+
+  usecase "Mostrar información actual del User" as S1
+  usecase "Validar formato en tiempo real" as S2
+  usecase "Validar unicidad de email o username si cambiaron" as S3
+  usecase "Persistir cambios (cifrando contraseña si cambió)" as S4
+
+  usecase "Mostrar error de email o username duplicado" as A1
+}
+
+UC --> UC1
+UC --> UC2
+UC --> UC3
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+UC3 ..> S3 : <<include>>
+S3 ..> S4 : <<include>>
+
+S3 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el nuevo email o username
+  ya existe. No se persiste.
+end note
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml list.attendees
+
+title Ver listado de asistentes — Usuario Común (rol funcional: organizador)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder a la pestaña de asistentes en el detalle del evento" as UC1
+
+  usecase "Consultar todas las filas UserEvent con ese eventId" as S1
+  usecase "Mostrar listado con estado por asistente" as S2
+}
+
+UC --> UC1
+
+UC1 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+
+@enduml

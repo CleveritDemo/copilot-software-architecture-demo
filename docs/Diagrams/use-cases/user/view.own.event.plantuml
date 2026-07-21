@@ -1,0 +1,25 @@
+@startuml view.own.event
+
+title Ver detalle de evento propio — Usuario Común (rol funcional: organizador)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Seleccionar evento propio en el módulo de contenido" as UC1
+
+  usecase "Verificar que el usuario es el creador" as S1
+  usecase "Mostrar información completa del evento" as S2
+  usecase "Mostrar listado de asistentes (Regla 11)" as S3
+}
+
+UC --> UC1
+
+UC1 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+
+@enduml

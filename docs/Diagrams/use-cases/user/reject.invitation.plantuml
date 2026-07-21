@@ -1,0 +1,37 @@
+@startuml reject.invitation
+
+title Rechazar invitación — Usuario Común (rol funcional: asistente)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Abrir enlace de rechazo" as UC1
+  usecase "Confirmar rechazo" as UC2
+
+  usecase "Verificar que existe la UserEvent" as S1
+  usecase "Actualizar UserEvent.status = rechazado" as S2
+  usecase "Mostrar confirmación" as S3
+
+  usecase "Mostrar error: invitación no existe" as A1
+}
+
+UC --> UC1
+UC --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  la invitación fue eliminada
+  o no existe.
+end note
+
+@enduml

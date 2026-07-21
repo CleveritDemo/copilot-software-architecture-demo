@@ -1,0 +1,36 @@
+@startuml join.event
+
+title Unirse al evento — Usuario Común (rol funcional: asistente)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Abrir el detalle del evento en la fecha programada" as UC1
+  usecase "Hacer clic en el enlace de Google Meet" as UC2
+
+  usecase "Mostrar enlace de Google Meet" as S1
+  usecase "Redirigir a la sala externa de Google Meet" as S2
+
+  usecase "Mostrar aviso: evento finalizado" as A1
+}
+
+UC --> UC1
+UC --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el evento ya finalizó
+  (state = finalizado).
+  El enlace no está disponible.
+end note
+
+@enduml

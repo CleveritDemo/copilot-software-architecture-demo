@@ -1,0 +1,37 @@
+@startuml login
+
+title Iniciar sesión — Usuario Común
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Abrir pantalla de login" as UC1
+  usecase "Ingresar username y contraseña" as UC2
+  usecase "Enviar formulario" as UC3
+
+  usecase "Validar credenciales" as S1
+  usecase "Crear sesión y redirigir al módulo de contenido" as S2
+
+  usecase "Mostrar error de credenciales inválidas" as A1
+}
+
+UC --> UC1
+UC --> UC2
+UC --> UC3
+
+UC3 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  credenciales inválidas.
+  No se crea sesión.
+end note
+
+@enduml
