@@ -1,0 +1,41 @@
+@startuml create.event
+
+title Crear Evento — Usuario Común (rol funcional: organizador)
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Común" as UC
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Acceder a Crear Evento" as UC1
+  usecase "Ingresar título, descripción y fecha" as UC2
+  usecase "Enviar formulario" as UC3
+
+  usecase "Validar formato y fecha futura" as S1
+  usecase "Generar googleMeetLink" as S2
+  usecase "Crear Event (state = activo)" as S3
+  usecase "Redirigir al detalle del evento" as S4
+
+  usecase "Mostrar error de fecha inválida" as A1
+}
+
+UC --> UC1
+UC --> UC2
+UC --> UC3
+
+UC3 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+S3 ..> S4 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  fecha inválida o pasada.
+  No se persiste el Event.
+end note
+
+@enduml

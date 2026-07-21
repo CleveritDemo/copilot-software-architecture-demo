@@ -1,0 +1,39 @@
+@startuml add.user
+
+title Agregar usuario — Usuario Administrador
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Administrador" as Admin
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Seleccionar Agregar usuario" as UC1
+  usecase "Ingresar datos del nuevo User" as UC2
+  usecase "Enviar formulario" as UC3
+
+  usecase "Validar formato y unicidad" as S1
+  usecase "Cifrar contraseña" as S2
+  usecase "Persistir User (role = común)" as S3
+
+  usecase "Mostrar error de username o email duplicado" as A1
+}
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+
+UC3 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+S2 ..> S3 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  username o email duplicado.
+  No se persiste el User.
+end note
+
+@enduml

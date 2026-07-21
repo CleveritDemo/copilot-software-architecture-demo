@@ -1,0 +1,25 @@
+@startuml delete.any.event
+
+title Eliminar cualquier evento — Usuario Administrador
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Administrador" as Admin
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Seleccionar Event y elegir Eliminar" as UC1
+  usecase "Confirmar eliminación" as UC2
+
+  usecase "Solicitar confirmación" as S1
+  usecase "Eliminar Event y sus filas UserEvent (Regla 5)" as S2
+}
+
+Admin --> UC1
+Admin --> UC2
+
+UC1 ..> S1 : <<include>>
+UC2 ..> S2 : <<include>>
+
+@enduml

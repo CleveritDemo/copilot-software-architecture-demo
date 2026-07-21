@@ -1,0 +1,37 @@
+@startuml update.user
+
+title Modificar usuario — Usuario Administrador
+
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor "Usuario Administrador" as Admin
+
+rectangle "Sistema de Registro de Eventos" {
+  usecase "Seleccionar User en el listado" as UC1
+  usecase "Modificar campos deseados" as UC2
+  usecase "Guardar cambios" as UC3
+
+  usecase "Validar formato y unicidad de email/username" as S1
+  usecase "Persistir cambios en el User" as S2
+
+  usecase "Mostrar error de conflicto de unicidad" as A1
+}
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+
+UC3 ..> S1 : <<include>>
+S1 ..> S2 : <<include>>
+
+S1 ..> A1 : <<extend>>
+
+note right of A1
+  Flujo alternativo A1:
+  el nuevo email o username
+  ya existe. No se persiste.
+end note
+
+@enduml
