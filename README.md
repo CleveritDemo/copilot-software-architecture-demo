@@ -851,7 +851,7 @@ business context"* into structured use case tables, and another that
 converts a use case into a PlantUML diagram.
 
 <p align="center">
-  <img src="./images/step-06-plantuml.svg" alt="Placeholder — rendered PlantUML diagram" width="720" />
+  <img src="./images/step-06-plantuml.png" alt="Placeholder — rendered PlantUML diagram" width="720" />
 </p>
 
 ### 6.1 · Generate use case documents
