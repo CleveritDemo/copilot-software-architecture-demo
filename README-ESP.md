@@ -90,7 +90,7 @@ Al finalizar el laboratorio, el participante será capaz de:
 ## Flujo del workshop
 
 <p align="center">
-  <img src="./images/workshop-flow.png" alt="Flujo del workshop — del requerimiento al scaffold hexagonal" />
+  <img src="./images/workshop-flow.svg" alt="Flujo del workshop — del requerimiento al scaffold hexagonal" />
 </p>
 
 ```mermaid
