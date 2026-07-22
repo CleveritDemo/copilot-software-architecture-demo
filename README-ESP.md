@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <p align="center">
-  <img src="./images/header-es.svg" alt="GitHub Copilot — Workshop de Arquitectura de Software" />
+  <img src="./images/header_esp.png" alt="GitHub Copilot — Workshop de Arquitectura de Software" />
 </p>
 
 # GitHub Copilot — Workshop de Arquitectura de Software
