@@ -186,7 +186,7 @@ create a repo-level instructions file. Copilot Chat automatically loads it in
 all three modes (Ask / Edit / Agent).
 
 <p align="center">
-  <img src="./images/step-01-copilot-instructions.svg" alt="Placeholder — Copilot Instructions file" width="720" />
+  <img src="./images/step-01-copilot-instructions.png" alt="Placeholder — Copilot Instructions file" width="720" />
 </p>
 
 Create `.github/copilot-instructions.md` with content along these lines:
