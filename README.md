@@ -305,7 +305,7 @@ switch Copilot Chat to **Ask mode** to explore the domain without letting
 Copilot edit any file yet.
 
 <p align="center">
-  <img src="./images/step-04-context-refs.svg" alt="Placeholder — using #codebase and #file references" width="720" />
+  <img src="./images/step-04-context-refs.png" alt="Placeholder — using #codebase and #file references" width="720" />
 </p>
 
 > 🤓 **System clarification**
