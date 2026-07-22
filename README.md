@@ -164,7 +164,7 @@ quick reference — the individual steps explain when and why to use them.
 > screenshot in this workshop assumes **Agent Mode** unless stated otherwise.
 
 <p align="center">
-  <img src="./images/step-02-agent-mode.svg" alt="Placeholder — selecting Agent Mode" width="720" />
+  <img src="./images/step-02-agent-mode.png" alt="Placeholder — selecting Agent Mode" width="720" />
 </p>
 
 ---
