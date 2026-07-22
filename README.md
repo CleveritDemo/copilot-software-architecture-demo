@@ -536,7 +536,7 @@ The next several steps ("generate a Markdown file per entity", "per actor",
 **prompt file** so you (and the rest of the team) can reuse it.
 
 <p align="center">
-  <img src="./images/step-03-prompt-file.svg" alt="Placeholder — reusable prompt file" width="720" />
+  <img src="./images/step-03-prompt-file.png" alt="Placeholder — reusable prompt file" width="720" />
 </p>
 
 ### 4.1 · Author the prompt file
