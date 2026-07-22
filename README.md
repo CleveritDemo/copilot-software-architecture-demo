@@ -1211,7 +1211,7 @@ graph TD
 ```
 
 <p align="center">
-  <img src="./images/step-08-agent-scaffold.svg" alt="Placeholder — Agent Mode scaffolding the .NET solution" width="720" />
+  <img src="./images/step-08-agent-scaffold.png" alt="Placeholder — Agent Mode scaffolding the .NET solution" width="720" />
 </p>
 
 Ask **Agent Mode** to scaffold the solution. Because Agent Mode can run
