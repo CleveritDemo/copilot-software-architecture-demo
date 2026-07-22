@@ -480,7 +480,7 @@ scaffolding once, it can create folders, run `git`, and even ask you to
 approve `dotnet new` calls.
 
 <p align="center">
-  <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Agent Mode generating docs" width="720" />
+  <img src="./images/step-05-agent-generating.png" alt="Placeholder — Agent Mode generating docs" width="720" />
 </p>
 
 Target folder structure (the `Diagrams/` subfolders are introduced by
