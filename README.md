@@ -993,7 +993,7 @@ any single entity but participate in the workflows that connect actors and
 entities.
 
 <p align="center">
-  <img src="./images/step-07-mermaid.svg" alt="Placeholder — rendered Mermaid sequence diagram" width="720" />
+  <img src="./images/step-07-mermaid.png" alt="Placeholder — rendered Mermaid sequence diagram" width="720" />
 </p>
 
 ### 7.1 · Confirm the service list
