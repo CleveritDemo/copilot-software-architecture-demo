@@ -90,7 +90,7 @@ Al finalizar el laboratorio, el participante será capaz de:
 ## Flujo del workshop
 
 <p align="center">
-  <img src="./images/workshop-flow.svg" alt="Flujo del workshop — del requerimiento al scaffold hexagonal" />
+  <img src="./images/workshop-flow.png" alt="Flujo del workshop — del requerimiento al scaffold hexagonal" />
 </p>
 
 ```mermaid
@@ -173,7 +173,7 @@ por qué usar cada una.
 > lo contrario.
 
 <p align="center">
-  <img src="./images/step-02-agent-mode.svg" alt="Placeholder — selección de Modo Agente" width="720" />
+  <img src="./images/step-02-agent-mode.png" alt="Placeholder — selección de Modo Agente" width="720" />
 </p>
 
 ---
@@ -195,7 +195,7 @@ chat, crea un archivo de instrucciones a nivel repositorio. Copilot Chat lo
 carga automáticamente en los tres modos (Ask / Edit / Agente).
 
 <p align="center">
-  <img src="./images/step-01-copilot-instructions.svg" alt="Placeholder — archivo Copilot Instructions" width="720" />
+  <img src="./images/step-01-copilot-instructions.png" alt="Placeholder — archivo Copilot Instructions" width="720" />
 </p>
 
 Crea `.github/copilot-instructions.md` con contenido similar a este:
@@ -318,7 +318,7 @@ Copilot Chat a **Modo Ask** para explorar el dominio sin que Copilot edite
 archivos todavía.
 
 <p align="center">
-  <img src="./images/step-04-context-refs.svg" alt="Placeholder — uso de #codebase y #file" width="720" />
+  <img src="./images/step-04-context-refs.png" alt="Placeholder — uso de #codebase y #file" width="720" />
 </p>
 
 > 🤓 **Aclaratoria de sistema**
@@ -495,7 +495,7 @@ vez, puede crear carpetas, correr `git` e incluso pedirte aprobación para
 llamadas a `dotnet new`.
 
 <p align="center">
-  <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Modo Agente generando docs" width="720" />
+  <img src="./images/step-05-agent-generating.png" alt="Placeholder — Modo Agente generando docs" width="720" />
 </p>
 
 Estructura de carpetas objetivo (las subcarpetas de `Diagrams/` aparecen
@@ -551,7 +551,7 @@ Los próximos pasos ("generar un archivo Markdown por entidad", "por actor",
 **prompt file** para reutilizarla tú y el resto del equipo.
 
 <p align="center">
-  <img src="./images/step-03-prompt-file.svg" alt="Placeholder — prompt file reutilizable" width="720" />
+  <img src="./images/step-03-prompt-file.png" alt="Placeholder — prompt file reutilizable" width="720" />
 </p>
 
 ### 4.1 · Escribir el prompt file
@@ -872,7 +872,7 @@ actores + el contexto de negocio"* en tablas estructuradas de casos de
 uso, y otro que traduce un caso de uso a un diagrama PlantUML.
 
 <p align="center">
-  <img src="./images/step-06-plantuml.svg" alt="Placeholder — diagrama PlantUML renderizado" width="720" />
+  <img src="./images/step-06-plantuml.png" alt="Placeholder — diagrama PlantUML renderizado" width="720" />
 </p>
 
 ### 6.1 · Generar los documentos de casos de uso
@@ -1015,7 +1015,7 @@ entidad por sí sola, pero participan en los flujos de trabajo que conectan
 actores con entidades.
 
 <p align="center">
-  <img src="./images/step-07-mermaid.svg" alt="Placeholder — diagrama de secuencia Mermaid" width="720" />
+  <img src="./images/step-07-mermaid.png" alt="Placeholder — diagrama de secuencia Mermaid" width="720" />
 </p>
 
 ### 7.1 · Confirmar la lista de servicios
@@ -1234,7 +1234,7 @@ graph TD
 ```
 
 <p align="center">
-  <img src="./images/step-08-agent-scaffold.svg" alt="Placeholder — Modo Agente andamiando la solución .NET" width="720" />
+  <img src="./images/step-08-agent-scaffold.png" alt="Placeholder — Modo Agente andamiando la solución .NET" width="720" />
 </p>
 
 Pide al **Modo Agente** que ande la solución. Como el Modo Agente puede
