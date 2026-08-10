@@ -51,7 +51,7 @@ sistema de software **desde cero**.
 
 El objetivo no es enseñar UML o arquitectura hexagonal a fondo, sino mostrar
 cómo las **capacidades agénticas** de Copilot — las que forman parte de los
-modos Ask / Edit / **Agente** de Copilot Chat — aceleran todo el flujo de
+modos Ask / Plan / **Agente** de Copilot Chat — aceleran todo el flujo de
 arquitectura: diagramas de casos de uso, diagramas de secuencia,
 documentación de entidades y un scaffold de proyecto funcional, todo guiado
 por prompts en lenguaje natural que el Modo Agente de Copilot ejecuta de
@@ -154,7 +154,7 @@ por qué usar cada una.
 | Característica | Qué es | Dónde vive |
 | -------------- | ------ | ---------- |
 | **Modo Ask** | Chat que responde preguntas y genera fragmentos en el hilo. | Chat view · selector de modo |
-| **Modo Edit** | Chat que propone ediciones multi-archivo para que las revises antes de aplicar. | Chat view · selector de modo |
+| **Modo Plan** | Chat que propone ediciones multi-archivo para que las revises antes de aplicar. | Chat view · selector de modo |
 | **Modo Agente** | Modo autónomo que planifica, edita archivos y ejecuta herramientas hasta cumplir el objetivo, pidiendo aprobación para comandos de terminal. | Chat view · selector de modo |
 | **Copilot Instructions** | Prompt de sistema de nivel repositorio, siempre activo. | `.github/copilot-instructions.md` o `AGENTS.md` |
 | **Archivos de instrucciones** | Instrucciones focalizadas que se aplican a rutas específicas. | `.github/instructions/*.instructions.md` con frontmatter `applyTo` |
@@ -168,7 +168,7 @@ por qué usar cada una.
 
 > 💡 **Tip**
 >
-> Copilot Chat ahora expone un **selector de modo** (Ask / Edit / Agente).
+> Copilot Chat ahora expone un **selector de modo** (Ask / Plan / Agente).
 > Cada captura de este workshop asume **Modo Agente** salvo que se indique
 > lo contrario.
 
@@ -192,7 +192,7 @@ Para tareas de arquitectura Copilot necesita **dos capas de contexto**:
 
 En lugar de pegar el mismo prompt de "quién soy" al principio de cada
 chat, crea un archivo de instrucciones a nivel repositorio. Copilot Chat lo
-carga automáticamente en los tres modos (Ask / Edit / Agente).
+carga automáticamente en los tres modos (Ask / Plan / Agente).
 
 <p align="center">
   <img src="./images/step-01-copilot-instructions.png" alt="Placeholder — archivo Copilot Instructions" width="720" />
