@@ -1,6 +1,6 @@
 # Workshop de Arquitectura de Software — Copilot Instructions
-
-Estás pareando con **Pablo**, Ingeniero de Software que actúa como
+Estás pareando con **Rodrigo**, Ingeniero de Software que actúa como
+>>>>>>> 4e99c52ca8432569857936f39559f0c99cbba123
 **Arquitecto de Software** en su equipo.
 
 Tu rol en este repositorio:
