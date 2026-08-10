@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 MD041 -->
 <p align="center">
-  <img src="./images/header-en.svg" alt="GitHub Copilot — Software Architecture Workshop" />
+  <img src="./images/header_eng.png" alt="GitHub Copilot — Software Architecture Workshop" />
 </p>
 
 # GitHub Copilot — Software Architecture Workshop
@@ -164,7 +164,7 @@ quick reference — the individual steps explain when and why to use them.
 > screenshot in this workshop assumes **Agent Mode** unless stated otherwise.
 
 <p align="center">
-  <img src="./images/step-02-agent-mode.svg" alt="Placeholder — selecting Agent Mode" width="720" />
+  <img src="./images/step-02-agent-mode.png" alt="Placeholder — selecting Agent Mode" width="720" />
 </p>
 
 ---
@@ -186,7 +186,7 @@ create a repo-level instructions file. Copilot Chat automatically loads it in
 all three modes (Ask / Edit / Agent).
 
 <p align="center">
-  <img src="./images/step-01-copilot-instructions.svg" alt="Placeholder — Copilot Instructions file" width="720" />
+  <img src="./images/step-01-copilot-instructions.png" alt="Placeholder — Copilot Instructions file" width="720" />
 </p>
 
 Create `.github/copilot-instructions.md` with content along these lines:
@@ -305,7 +305,7 @@ switch Copilot Chat to **Ask mode** to explore the domain without letting
 Copilot edit any file yet.
 
 <p align="center">
-  <img src="./images/step-04-context-refs.svg" alt="Placeholder — using #codebase and #file references" width="720" />
+  <img src="./images/step-04-context-refs.png" alt="Placeholder — using #codebase and #file references" width="720" />
 </p>
 
 > 🤓 **System clarification**
@@ -480,7 +480,7 @@ scaffolding once, it can create folders, run `git`, and even ask you to
 approve `dotnet new` calls.
 
 <p align="center">
-  <img src="./images/step-05-agent-generating.svg" alt="Placeholder — Agent Mode generating docs" width="720" />
+  <img src="./images/step-05-agent-generating.png" alt="Placeholder — Agent Mode generating docs" width="720" />
 </p>
 
 Target folder structure (the `Diagrams/` subfolders are introduced by
@@ -536,7 +536,7 @@ The next several steps ("generate a Markdown file per entity", "per actor",
 **prompt file** so you (and the rest of the team) can reuse it.
 
 <p align="center">
-  <img src="./images/step-03-prompt-file.svg" alt="Placeholder — reusable prompt file" width="720" />
+  <img src="./images/step-03-prompt-file.png" alt="Placeholder — reusable prompt file" width="720" />
 </p>
 
 ### 4.1 · Author the prompt file
@@ -851,7 +851,7 @@ business context"* into structured use case tables, and another that
 converts a use case into a PlantUML diagram.
 
 <p align="center">
-  <img src="./images/step-06-plantuml.svg" alt="Placeholder — rendered PlantUML diagram" width="720" />
+  <img src="./images/step-06-plantuml.png" alt="Placeholder — rendered PlantUML diagram" width="720" />
 </p>
 
 ### 6.1 · Generate use case documents
@@ -993,7 +993,7 @@ any single entity but participate in the workflows that connect actors and
 entities.
 
 <p align="center">
-  <img src="./images/step-07-mermaid.svg" alt="Placeholder — rendered Mermaid sequence diagram" width="720" />
+  <img src="./images/step-07-mermaid.png" alt="Placeholder — rendered Mermaid sequence diagram" width="720" />
 </p>
 
 ### 7.1 · Confirm the service list
@@ -1211,7 +1211,7 @@ graph TD
 ```
 
 <p align="center">
-  <img src="./images/step-08-agent-scaffold.svg" alt="Placeholder — Agent Mode scaffolding the .NET solution" width="720" />
+  <img src="./images/step-08-agent-scaffold.png" alt="Placeholder — Agent Mode scaffolding the .NET solution" width="720" />
 </p>
 
 Ask **Agent Mode** to scaffold the solution. Because Agent Mode can run
